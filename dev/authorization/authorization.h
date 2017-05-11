@@ -7,8 +7,8 @@ public:
     Authorizator();
     ~Authorizator();
 
-    virtual Session Login( std::string username, std::string password );
-    virtual int Logout( Session session );
+    virtual Session Login( std::string username, std::string password ) = 0;
+    virtual int Logout( Session session ) = 0;
 };
 
 #endif /*authorization_h*/
