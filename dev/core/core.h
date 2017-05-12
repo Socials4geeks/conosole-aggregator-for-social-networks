@@ -2,7 +2,7 @@
 #define core_h
 
 class Core{
-    
+    //TODO
 };
 
 #endif /* core_h */

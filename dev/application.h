@@ -2,7 +2,7 @@
 #ifndef Application_h
 #define Application_h
 
-#include "core.h"
+#include "core/core.h"
 
 class Application {
 public:
