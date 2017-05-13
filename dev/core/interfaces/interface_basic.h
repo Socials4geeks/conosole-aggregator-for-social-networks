@@ -1,6 +1,9 @@
 #ifndef interface_basic_h
 #define interface_basic_h
 
+#include <iostream>
+#include "termcolor.h"
+
 class InterfaceBasic : public Interface {
 public:
     InterfaceBasic();

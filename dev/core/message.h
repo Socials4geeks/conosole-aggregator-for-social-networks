@@ -1,8 +1,7 @@
 #ifndef message_h
 #define message_h
+#include <iostring>
 #include <ctime>
-
-#include interface.h
 
 using std::string;
 
@@ -14,4 +13,4 @@ struct Message {
     string body;
 };
 
-#endif
+#endif /* message_h */
