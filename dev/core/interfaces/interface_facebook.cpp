@@ -8,17 +8,17 @@ InterfaceFacebook::~InterfaceFacebook(){
 
 };
 
-int InterfaceFacebook::PrintMessages( std::map<std::string, std::string> data ){
+int InterfaceFacebook::PrintMessages( std::vector<Message> data ){
     //TODO
     return 0;
 };
 
-int InterfaceFacebook::PrintWall( std::map<std::string, std::string> data ){
+int InterfaceFacebook::PrintWall( std::vector<Message> data ){
     //TODO
     return 0;
 };
 
-int InterfaceFacebook::PrintFriends( std::map<std::string, std::string> data ){
+int InterfaceFacebook::PrintFriends( std::vector<Message> data ){
     //TODO
     return 0;
 };

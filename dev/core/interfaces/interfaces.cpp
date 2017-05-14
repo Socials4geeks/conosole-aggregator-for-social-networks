@@ -12,5 +12,3 @@ Interface::~Interface() {
 int Interface::PrintHello() {
    //TODO
 };
-
-
