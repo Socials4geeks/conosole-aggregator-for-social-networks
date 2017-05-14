@@ -8,6 +8,7 @@
 #include "../wall_entry.h"
 #include "interfaces.h"
 #include <vector>
+#include <algorithm>
 
 class InterfaceVK : public Interface {
 public:

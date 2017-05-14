@@ -9,8 +9,8 @@ InterfaceBasic::~InterfaceBasic(){
 };
 
 void printLoginNecessity() {
-    std::cout << termcolor::on_red << "Ошибка доступа:"
-              << termcolor::reset << " Пожалуйста, авторизуйтесь." << std::endl;
+    std::cout << termcolor::on_red << "Access violation:"
+              << termcolor::reset << " Please, login." << std::endl;
 }
 
 int InterfaceBasic::PrintMessages( std::vector<Message> data ){

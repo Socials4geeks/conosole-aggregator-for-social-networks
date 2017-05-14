@@ -21,13 +21,25 @@ int InterfaceVK::PrintMessages( std::vector<Message> data ){
 };
 
 int InterfaceVK::PrintWall( std::vector<WallEntry> data ){
-    std::cout << termcolor::on_red << "Ошибка:"
-              << termcolor::reset << " Недоступно в данной версии." << std::endl;
+    std::cout << termcolor::on_red << "Access violation:"
+              << termcolor::reset << " Unavailable in current version." << std::endl;
     return 0;
 };
 
 int InterfaceVK::PrintFriends( std::vector<FriendEntry> data ){
-    //TODO
+    std::sort(data.begin(), data.end(), 
+              [](const FriendEntry & a, const FriendEntry & b) -> bool { 
+                  return (a.isOnline > b.isOnline);
+              });
+
+    for (int i = 0; i < data.size(); i++) {
+        if (data[i].isOnline) {
+            std::cout << termcolor::green << data[i].username << termcolor::reset << ": online" << std::endl;
+        } else {
+            std::cout << termcolor::red << data[i].username << termcolor::reset << ": " << data[i].lastEnter << std::endl;
+        }
+    }
+
     return 0;
 };
 
@@ -44,4 +56,24 @@ int main() {
     v.push_back(m);
     v.push_back(m);
     ivk.PrintMessages(v);
+
+    FriendEntry f1;
+    f1.username = "Friend";
+    f1.isOnline = true;
+    f1.lastEnter = "10.2.19";
+
+    FriendEntry f2;
+    f2.username = "Blah-blah";
+    f2.isOnline = false;
+    f2.lastEnter = "21.5.20";
+    std::vector<FriendEntry> vf;
+    vf.push_back(f1);
+    vf.push_back(f2);
+    vf.push_back(f1);
+    vf.push_back(f2);
+    vf.push_back(f1);
+    vf.push_back(f2);
+    ivk.PrintFriends(vf);
+
+
 }
