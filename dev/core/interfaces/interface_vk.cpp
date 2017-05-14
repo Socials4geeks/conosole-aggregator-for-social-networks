@@ -42,38 +42,3 @@ int InterfaceVK::PrintFriends( std::vector<FriendEntry> data ){
 
     return 0;
 };
-
-int main() {
-    Message m;
-    m.username = "Имя пользователя";
-    m.datetime = "16:30";
-    m.title = "";
-    m.body = "Hello, world";
-    InterfaceVK ivk;
-    std::vector<Message> v;
-    v.push_back(m);
-    v.push_back(m);
-    v.push_back(m);
-    v.push_back(m);
-    ivk.PrintMessages(v);
-
-    FriendEntry f1;
-    f1.username = "Friend";
-    f1.isOnline = true;
-    f1.lastEnter = "10.2.19";
-
-    FriendEntry f2;
-    f2.username = "Blah-blah";
-    f2.isOnline = false;
-    f2.lastEnter = "21.5.20";
-    std::vector<FriendEntry> vf;
-    vf.push_back(f1);
-    vf.push_back(f2);
-    vf.push_back(f1);
-    vf.push_back(f2);
-    vf.push_back(f1);
-    vf.push_back(f2);
-    ivk.PrintFriends(vf);
-
-
-}
