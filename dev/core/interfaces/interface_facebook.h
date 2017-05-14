@@ -4,6 +4,8 @@
 #include <iostream>
 #include "termcolor.h"
 #include "../message.h"
+#include "../friend_entry.h"
+#include "../wall_entry.h"
 #include "interfaces.h"
 #include <vector>
 

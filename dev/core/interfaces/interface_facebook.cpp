@@ -13,12 +13,12 @@ int InterfaceFacebook::PrintMessages( std::vector<Message> data ){
     return 0;
 };
 
-int InterfaceFacebook::PrintWall( std::vector<Message> data ){
+int InterfaceFacebook::PrintWall( std::vector<WallEntry> data ){
     //TODO
     return 0;
 };
 
-int InterfaceFacebook::PrintFriends( std::vector<Message> data ){
+int InterfaceFacebook::PrintFriends( std::vector<FriendEntry> data ){
     //TODO
     return 0;
 };

@@ -18,12 +18,12 @@ int InterfaceBasic::PrintMessages( std::vector<Message> data ){
     return 1;
 };
 
-int InterfaceBasic::PrintWall( std::vector<Message> data ){
+int InterfaceBasic::PrintWall( std::vector<WallEntry> data ){
     printLoginNecessity();
     return 1;
 };
 
-int InterfaceBasic::PrintFriends( std::vector<Message> data ){
+int InterfaceBasic::PrintFriends( std::vector<FriendEntry> data ){
     printLoginNecessity();
     return 1;
 };

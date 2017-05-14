@@ -4,6 +4,8 @@
 #include <iostream>
 #include "termcolor.h"
 #include "../message.h"
+#include "../friend_entry.h"
+#include "../wall_entry.h"
 #include "interfaces.h"
 #include <vector>
 
@@ -13,8 +15,8 @@ public:
     ~InterfaceBasic();
 
     int PrintMessages( std::vector<Message> data );
-    int PrintFriends( std::vector<Message> data );
-    int PrintWall( std::vector<Message> data );
+    int PrintFriends( std::vector<FriendEntry> data );
+    int PrintWall( std::vector<WallEntry> data );
 };
 
 #endif /* interface_basic_h */

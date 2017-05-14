@@ -416,6 +416,30 @@ namespace termcolor
         return stream;
     }
 
+    struct colorizeStringByHash {
+        colorizeStringByHash(std::string s) : str(s) {}
+        std::string str;
+    };
+
+    std::ostream& operator<< (std::ostream& os, const colorizeStringByHash& cu) {
+        int color_number = 6;
+        int hash = 0;
+        for (int i = 0; i < cu.str.size(); i++)
+            hash += (int) cu.str[i];
+        hash %= color_number;
+
+        switch (hash) {
+            case 0: os << red; break;
+            case 1: os << green; break;
+            case 2: os << yellow; break;
+            case 3: os << blue; break;
+            case 4: os << magenta; break;
+            case 5: os << cyan; break;
+        }
+        os << cu.str;
+        return os;
+    }
+
 
 
     //! Since C++ hasn't a way to hide something in the header from
