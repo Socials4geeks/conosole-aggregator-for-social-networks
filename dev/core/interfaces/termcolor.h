@@ -427,6 +427,7 @@ namespace termcolor
         for (int i = 0; i < cu.str.size(); i++)
             hash += (int) cu.str[i];
         hash %= color_number;
+        if (hash < 0) hash *= -1;
 
         switch (hash) {
             case 0: os << red; break;

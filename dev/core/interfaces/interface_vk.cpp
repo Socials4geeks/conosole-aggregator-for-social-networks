@@ -33,12 +33,15 @@ int InterfaceVK::PrintFriends( std::vector<FriendEntry> data ){
 
 int main() {
     Message m;
-    m.username = "User Name";
+    m.username = "Имя пользователя";
     m.datetime = "16:30";
     m.title = "";
     m.body = "Hello, world";
     InterfaceVK ivk;
     std::vector<Message> v;
+    v.push_back(m);
+    v.push_back(m);
+    v.push_back(m);
     v.push_back(m);
     ivk.PrintMessages(v);
 }
