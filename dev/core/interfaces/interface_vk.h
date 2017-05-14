@@ -9,10 +9,14 @@
 #include "interfaces.h"
 #include <vector>
 
-class Interface_VK : public Interface {
+class InterfaceVK : public Interface {
 public:
     InterfaceVK();
     ~InterfaceVK();
+
+    int PrintMessages( std::vector<Message> data );
+    int PrintWall( std::vector<WallEntry> data );
+    int PrintFriends( std::vector<FriendEntry> data );
 };
 
 #endif /* interface_vk_h */
