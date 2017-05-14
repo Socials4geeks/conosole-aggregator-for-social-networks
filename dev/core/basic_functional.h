@@ -4,8 +4,7 @@
 
 class BasicFunctions{
 public:
-    void Hello(); //
-    
+    //TODO
 };
 
 #endif /* basic_functional_h */

@@ -68,6 +68,6 @@ struct Serialisator {
     T decode( void* data );
 };
 
-#include "serialisator.hpp"
+#include "storage/serialisator.hpp"
 
 #endif  // BASE_STORAGE_H

@@ -3,9 +3,9 @@
 
 #include <map>
 
-#include "APIs.h"
+#include "core/API/APIs.h"
 
-class APIInterface {
+class APIInterface : API {
 public:
     APIInterface() : api();
     /// Залогинивает пользователя с login, password
