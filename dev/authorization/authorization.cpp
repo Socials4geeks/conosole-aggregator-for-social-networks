@@ -1,9 +1,9 @@
 #include "authorisation/authorization.h"
     
 Authorizator::Authorizator() {
-    //TODO
+    users = Core.storage.Pop( "LoginsPasswords" ) //TODO обращение к кору такое себе
 }
 
 Authorizator::~Authorizator() {
-    //TODO
+    Core.storage.Push( "LoginsPasswords", users )  //TODO обращение к кору такое себе
 }
