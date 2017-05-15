@@ -42,3 +42,13 @@ int InterfaceVK::PrintFriends( std::vector<FriendEntry> data ){
 
     return 0;
 };
+
+std::map<std::string, std::string> InterfaceVK::Input() {
+    std::string input;
+    std::cin >> input;
+    std::istringstream in(input);
+    std::string currentWord;
+    in >> currentWord;
+
+    if (currentWord == "set_default_messenger")
+}

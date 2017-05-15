@@ -10,7 +10,7 @@ InterfaceBasic::~InterfaceBasic(){
 
 void printLoginNecessity() {
     std::cout << termcolor::on_red << "Access violation:"
-              << termcolor::reset << " Please, login." << std::endl;
+              << termcolor::reset << " Please, login. Print 'help' for help." << std::endl;
 }
 
 int InterfaceBasic::PrintMessages( std::vector<Message> data ){

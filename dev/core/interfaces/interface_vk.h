@@ -3,12 +3,14 @@
 
 #include <iostream>
 #include "termcolor.h"
-#include "dev/core/message.h"
-#include "dev/core/friend_entry.h"
-#include "dev/core/wall_entry.h"
+#include "core/message.h"
+#include "core/friend_entry.h"
+#include "core/wall_entry.h"
 #include "interfaces.h"
 #include <vector>
 #include <algorithm>
+#include <sstream>
+
 
 class InterfaceVK : public Interface {
 public:
