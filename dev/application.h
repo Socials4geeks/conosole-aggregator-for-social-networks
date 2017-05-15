@@ -4,11 +4,11 @@
 #include <vector>
 #include <string>
 
-#include "core.h"
-#include "storage.h"
+#include "core/core.h"
+#include "storeges/storage.h"
 #include "session.h"
-#include "authorization.h"
-#include "serialiser.h"
+#include "authorization/authorization.h"
+#include "storages/serialiser.hpp"
 
 class Application {
 public:
