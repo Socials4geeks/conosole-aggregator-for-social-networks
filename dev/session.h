@@ -6,7 +6,8 @@
 #include <string>
 
 typedef std::pair<std::string, std::string> LoginPassword;
-typedef std::pair<std::string, LoginPassword> AuthInfo;
+typedef std::pair<std::string, LoginPassword> AuthInfo; // First string is social network's name
+//TODO Replace string to bin
 typedef std::map<std::string, std::string> Settings;
 
 /**
@@ -14,15 +15,16 @@ typedef std::map<std::string, std::string> Settings;
     Содержит в себе всю информацию о пользователе, включая настройки,
     логины, пароли и так далее
 **/
-struct Session {
-    Session() {};
-    Session( LoginPassword login_password ) : login_password( login_password ) {};
-    Session( LoginPassword login_password, Settings settings ) : login_password( login_password ),
-                                                                 user_settings( settings ) {};
-    Session( LoginPassword login_password, Settings settings ) : login_password( login_password ),
-                                                                 user_settings( settings ) {};
-    LoginPassword login_password;
-    std::vector<AuthInfo> auths;
+
+class Session {
+public:
+    Session();
+    Session( std::string login );
+    Session( std::string login, Settings settings ) 
+
+private:
+    std::string localLogin;
+    std::vector<AuthInfo> authsForSocialNetworks;
     Settings user_settings;
 };
 
