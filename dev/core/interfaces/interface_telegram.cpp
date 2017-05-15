@@ -8,17 +8,17 @@ InterfaceTelegram::~InterfaceTelegram(){
 
 };
 
-int InterfaceTelegram::PrintMessages( std::map<std::string, std::string> data ){
+int InterfaceTelegram::PrintMessages( std::vector<Message> data ){
     //TODO
     return 0;
 };
 
-int InterfaceTelegram::PrintWall( std::map<std::string, std::string> data ){
+int InterfaceTelegram::PrintWall( std::vector<WallEntry> data ){
     //TODO
     return 0;
 };
 
-int InterfaceTelegram::PrintFriends( std::map<std::string, std::string> data ){
+int InterfaceTelegram::PrintFriends( std::vector<FriendEntry> data ){
     //TODO
     return 0;
 };
