@@ -8,12 +8,12 @@ include <iostream>
 // "count":"2",
 // "filter":"",
 // "sort":""
-enum informationType {MESSAGES, FRIENDS};
-enum networkType {VK, TELEGRAM, FACEBOOK};
+enum information_type {MESSAGES, FRIENDS};
+enum network_type {VK, TELEGRAM};
 
 struct Request {
-    informationType get;
-    networkType network;
+    information_type get;
+    network_type network;
     int number;
     string filter;
 

@@ -47,8 +47,31 @@ std::map<std::string, std::string> InterfaceVK::Input() {
     std::string input;
     std::cin >> input;
     std::istringstream in(input);
-    std::string currentWord;
-    in >> currentWord;
+    std::string current_word;
+    in >> current_word;
 
-    if (currentWord == "set_default_messenger")
+    // if (current_word == "set_default_messenger") {
+    //     if (current_word == "vk") {
+    //         default_messenger = "vk";
+    //         std::cout << termcolor::green << "Default messenger setted to vk" << termcolor::reset << std::endl;
+    //     }
+    //     else if (current_word == "telegram") {
+    //         default_messenger = "telegram";
+    //         std::cout << termcolor::green << "Default messenger setted to telegram" << termcolor::reset << std::endl;
+    //     }
+    //     else
+    // }
+    if (current_word == "vk" || current_word == "telegram") {
+        std::map<std::string, std::string> request;
+        request.insert(std::pair<std::string, std::string>("get", current_word));
+        // Request r;
+        // if (current_word == "vk")
+        //     r.network_type = VK;
+        // if (current_word == "telegram")
+        //     r.network_type = TELEGRAM;
+
+        in >> current_word;
+    } else {
+        std::cout << termcolor::red << "Syntax error." << termcolor::reset << " Type 'help' for help" << std::endl;
+    }
 }
