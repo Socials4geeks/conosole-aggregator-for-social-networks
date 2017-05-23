@@ -1,0 +1,27 @@
+#!/bin/bash
+
+#NOTE: Чтобы собрать дебаг-версию, нужно просто заменить все reliase на debug
+
+UBUNTU_VERSION=$(lsb_release -r | awk '{ print $2 }')
+if [ $(echo "$UBUNTU_VERSION < 16.04" | bc) = 1 ]
+then
+   echo SORRY, your version of Ubuntu is not supported, please, upgrade your operation system
+   exit 1
+else
+   if xargs apt-get -y install < requirements.txt &&
+      git clone https://github.com/Microsoft/cpprestsdk.git casablanca &&
+      cd casablanca/Release &&
+      mkdir temp.casablanca.build.release &&
+      cd temp.casablanca.build.release &&
+      CXX=g++-4.8 cmake .. -DCMAKE_BUILD_TYPE=Release &&
+      make &&
+      cd Binares
+      ./test_runner *_test.so &&
+      make install
+   then
+      echo DONE project is success configurated!
+   else
+      echo ERROR occured when configuration the project!
+      exit 1
+   fi
+fi

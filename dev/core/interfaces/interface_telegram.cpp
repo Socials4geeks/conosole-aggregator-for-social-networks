@@ -1,4 +1,4 @@
-#include "interface_telegram.h"
+#include "core/interfaces/interface_telegram.h"
 
 InterfaceTelegram::InterfaceTelegram(){
 
@@ -22,4 +22,3 @@ int InterfaceTelegram::PrintFriends( std::vector<FriendEntry> data ){
     //TODO
     return 0;
 };
-

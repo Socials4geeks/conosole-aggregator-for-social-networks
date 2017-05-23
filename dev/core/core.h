@@ -6,13 +6,17 @@
 class Core{
 public:
 
+    Storage storage;
+
     Core();
     ~Core();
 
+    int RemoveSession( Session session );
+    bool IsSessionActive( Session session );
+
 private:
-    std::vector<Interface> interfaces;
-    Implementor implementor;
- 
+    std::vector< Session > sessions;
+
 };
 
 #endif /* core_h */
