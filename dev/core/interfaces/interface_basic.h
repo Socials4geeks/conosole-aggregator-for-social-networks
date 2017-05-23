@@ -14,9 +14,9 @@ public:
     InterfaceBasic();
     ~InterfaceBasic();
 
-    int PrintMessages( std::vector<Message> data );
-    int PrintFriends( std::vector<FriendEntry> data );
-    int PrintWall( std::vector<WallEntry> data );
+    int PrintMessages( std::vector<std::map<std::string, std::string>> data );
+    int PrintFriends( std::vector<std::map<std::string, std::string>> data );
+    int PrintWall( std::vector<std::map<std::string, std::string>> data );
 };
 
 #endif /* interface_basic_h */

@@ -12,9 +12,9 @@ public:
     ~Interface();
 
     int PrintHello();
-    virtual int PrintMessages( std::vector<Message> data ) = 0;
-    virtual int PrintWall( std::vector<WallEntry> data ) = 0;
-    virtual int PrintFriends( std::vector<FriendEntry> data ) = 0;
+    virtual int PrintMessages( std::vector<std::map<std::string, std::string>> data ) = 0;
+    virtual int PrintWall( std::vector<std::map<std::string, std::string>> data ) = 0;
+    virtual int PrintFriends( std::vector<std::map<std::string, std::string>> data ) = 0;
 };
 
 #endif /* interfaces_h */

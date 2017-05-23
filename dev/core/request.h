@@ -1,22 +1,23 @@
 #ifndef request_h
 #define request_h
 
-include <iostream>
+#include <iostream>
+#include <map>
 
 // "get":"messages",
 // "network":"VK",
 // "count":"2",
 // "filter":"",
 // "sort":""
-enum information_type {MESSAGES, FRIENDS};
-enum network_type {VK, TELEGRAM};
+using std::string;
+
+// enum information_type {MESSAGES, FRIENDS};
+// enum network_type {VK, TELEGRAM};
 
 struct Request {
-    information_type get;
-    network_type network;
-    int number;
-    string filter;
-
+    std::string account;
+    std::string command;
+    std::map<std::string, std::string> args;
 };
 
 #endif /* request_h */

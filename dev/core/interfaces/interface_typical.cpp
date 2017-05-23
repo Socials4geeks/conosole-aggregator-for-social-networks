@@ -1,18 +1,18 @@
-#include "core/interfaces/interface_vk.h"
+#include "core/interfaces/interface_typical.h"
 #include "core/request.h"
 #include "core/interfaces/interfaces.h"
 
-InterfaceVK::InterfaceVK() {
+InterfaceTypical::InterfaceTypical() {
 
 };
 
 
-InterfaceVK::~InterfaceVK() {
+InterfaceTypical::~InterfaceTypical() {
 
 };
 
 
-int InterfaceVK::PrintMessages( std::vector<Message> data ) {
+int InterfaceTypical::PrintMessages( std::vector<std::map<std::string, std::string>> data ) {
     for (int i = 0 ; i < data.size(); i++) {
         std::cout << termcolor::reset << "[" << data[i].datetime << "] "
                   << termcolor::colorizeStringByHash(data[i].username) << termcolor::reset << ": ";
@@ -24,14 +24,14 @@ int InterfaceVK::PrintMessages( std::vector<Message> data ) {
     return 0;
 };
 
-int InterfaceVK::PrintWall( std::vector<WallEntry> data ){
+int InterfaceTypical::PrintWall( std::vector<std::map<std::string, std::string>> data ){
     std::cout << termcolor::on_red << "Access violation:"
               << termcolor::reset << " Unavailable in current version." << std::endl;
     return 0;
 };
 
 
-int InterfaceVK::PrintFriends( std::vector<FriendEntry> data ){
+int InterfaceTypical::PrintFriends( std::vector<std::map<std::string, std::string>> data ){
     std::sort(data.begin(), data.end(), 
               [](const FriendEntry & a, const FriendEntry & b) -> bool { 
                   return (a.isOnline > b.isOnline);
@@ -67,7 +67,7 @@ std::vector<std::string> split(const std::string &s, char delim) {
 }
 
 
-Request InterfaceVK::Input() {
+Request InterfaceTypical::Input() {
     std::string input;
     std::string account, command;
     while(true) {
@@ -94,9 +94,9 @@ Request InterfaceVK::Input() {
         // std::cout << current_word;
 
     // if (current_word == "set_default_messenger") {
-    //     if (current_word == "vk") {
-    //         default_messenger = "vk";
-    //         std::cout << termcolor::green << "Default messenger setted to vk" << termcolor::reset << std::endl;
+    //     if (current_word == "Typical") {
+    //         default_messenger = "Typical";
+    //         std::cout << termcolor::green << "Default messenger setted to Typical" << termcolor::reset << std::endl;
     //     }
     //     else if (current_word == "telegram") {
     //         default_messenger = "telegram";
@@ -104,7 +104,7 @@ Request InterfaceVK::Input() {
     //     }
     //     else
     // }
-    // if (current_word == "vk" || current_word == "telegram") {
+    // if (current_word == "Typical" || current_word == "telegram") {
 
     //     in >> current_word;
     // } else {
