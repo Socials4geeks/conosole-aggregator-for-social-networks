@@ -3,10 +3,7 @@
 
 #include <iostream>
 #include "termcolor.h"
-#include "core/message.h"
-#include "core/friend_entry.h"
-#include "core/wall_entry.h"
-#include "core/request.h"
+#include "types.h"
 #include "core/interfaces.h"
 #include <vector>
 #include <algorithm>

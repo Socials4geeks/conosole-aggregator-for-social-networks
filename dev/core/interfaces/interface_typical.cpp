@@ -1,5 +1,5 @@
 #include "core/interfaces/interface_typical.h"
-#include "core/request.h"
+#include "types.h"
 #include "core/interfaces/interfaces.h"
 #include <stdexcept>
 
@@ -69,7 +69,7 @@ std::vector<std::string> split(const std::string &s, char delim) {
 }
 
 
-vector<string> split_in_args(std::string command){
+vector<string> split_to_tokens(std::string command){
     vector<string> qargs;
     int len = command.length();
     bool qot = false, sqot = false;
@@ -112,11 +112,26 @@ vector<string> split_in_args(std::string command){
 }
 
 
+std::map<std::string, std::string> split_to_kwargs(std::vector<std::string>& args) {
+    std::map<std::string, std::string> kwargs;
+    for (int i = 0; i < args.size(); i++) {
+        if (args[i][0] == '-') {
+            if (i + 1 < args.size() || args[i + 1][0] != '-') {
+                kwargs[args[i]] = args[i + 1];
+            } else {
+                kwargs[args[i]] = '\0';
+            }
+        }
+    }
+    return kwargs;
+}
+
+
 Request InterfaceTypical::Input() {
     std::string line;
     std::string account, command;
     Request request;
-    while(true) {
+    while (true) {
         std::getline(std::cin, line);
 
         std::istringstream in(line);
@@ -125,43 +140,18 @@ Request InterfaceTypical::Input() {
         if (account == "" || command == "") {
             std::cout << termcolor::red << "Syntax error." << termcolor::reset << " Type 'help' for help" << std::endl;
             continue;
-        request.account = account;
-        request.command = command;
+        request.IdOfRemoteAccount = account;
+        request.Action = command;
 
         if (line.peek() == EOF)
-            
+            break;
+        } else {
+            std::string args_str;
+            std::getline(in, args_str);
+            std::vector<std::vector> args_vec = split_to_tokens(args_str);
+            std::map<std::string, std::string> kwargs = split_to_kwargs(args_vec);
+            request.Params = kwargs;
         }
-
-
-        std::string args;
-        std::getline(in, args);
-
-        std::cout << account << std::endl;
-        std::cout << command;
     }
-
-    // std::string current_word;
-    // in >> current_word;
-    // while (in>>current_word)
-        // std::cout << current_word;
-
-    // if (current_word == "set_default_messenger") {
-    //     if (current_word == "Typical") {
-    //         default_messenger = "Typical";
-    //         std::cout << termcolor::green << "Default messenger setted to Typical" << termcolor::reset << std::endl;
-    //     }
-    //     else if (current_word == "telegram") {
-    //         default_messenger = "telegram";
-    //         std::cout << termcolor::green << "Default messenger setted to telegram" << termcolor::reset << std::endl;
-    //     }
-    //     else
-    // }
-    // if (current_word == "Typical" || current_word == "telegram") {
-
-    //     in >> current_word;
-    // } else {
-    //     // std::cout << termcolor::red << "Syntax error." << termcolor::reset << " Type 'help' for help" << std::endl;
-    // }
-
-    return Request();
+    return request;
 }
