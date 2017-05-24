@@ -1,20 +1,33 @@
-#ifndef types_h
+#aifndef types_h
 #define types_h
 
 typedef authInfo < std::pair< std::string, std::string > > 
 
 typedef params std::map< std::string, std::string >
 
+typedef typeOdAction enum{
+    SHOW_MESSAGES,
+    SHOW_WALL,
+    SHOW_FRIENDS,
+    SEND_MESSAGE,
+    ADD_WALL,
+    ADD_FRIEND,
+    REMOVE_FRIEND
+}
+
+
 typedef typeOfResponse enum {
     MESSAGES,
     WALL,
     FRIENDS,
-    LOGIN_STATUS
+    LOGIN_STATUS,
+    ACCEPT,
+    ERROR,
 }
 
 typedef Request struct {
     std::string IdOfRemoteAccount;
-    std::string Action;
+    typeOfAction Action;
     params Params;
 }
 
