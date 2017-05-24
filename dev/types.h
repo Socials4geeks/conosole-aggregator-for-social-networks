@@ -5,10 +5,23 @@ typedef authInfo < std::pair< std::string, std::string > >
 
 typedef params std::map< std::string, std::string >
 
+typedef typeOfResponse enum {
+    MESSAGES,
+    WALL,
+    FRIENDS,
+    LOGIN_STATUS
+}
+
 typedef Request struct {
-    std::string IdOfRmoteAccount;
+    std::string IdOfRemoteAccount;
     std::string Action;
     params Params;
+}
+
+typedef Response struct {
+    std::string IdOfRemoteAccount;
+    typeOfResponse Type;
+    std::vector< params > Params;
 }
 
 typedef status enum {
