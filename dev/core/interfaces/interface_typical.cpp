@@ -13,15 +13,15 @@ InterfaceTypical::~InterfaceTypical() {
 
 }
 
-int InterfaceTypical::PrintWall( std::vector<std::map<std::string, std::string> > data ) {
+int InterfaceTypical::PrintWall( params data ) {
 
 }
 
-int InterfaceTypical::PrintFriends( std::vector<std::map<std::string, std::string> > data ) {
+int InterfaceTypical::PrintFriends( params data ) {
 
 }
 
-int InterfaceTypical::PrintMessages( std::vector<std::map<std::string, std::string> > data ) {
+int InterfaceTypical::PrintMessages( params data ) {
     if (data.Type == typeOfResponse.ERROR) {
         std::string reason = data[0].at("reason");
         std::cout << termcolor::red << reason << termcolor::reset << " Type 'help' for help" << std::endl;
@@ -38,14 +38,14 @@ int InterfaceTypical::PrintMessages( std::vector<std::map<std::string, std::stri
     return 0;
 };
 
-int InterfaceTypical::PrintWall( std::vector<std::map<std::string, std::string> > data ){
+int InterfaceTypical::PrintWall( params data ){
     std::cout << termcolor::on_red << "Access violation:"
               << termcolor::reset << " Unavailable in current version." << std::endl;
     return 0;
 };
 
 
-int InterfaceTypical::PrintFriends( std::vector<std::map<std::string, std::string> > data ){
+int InterfaceTypical::PrintFriends( params data ){
     std::sort(data.begin(), data.end(), 
               [](const FriendEntry & a, const FriendEntry & b) -> bool { 
                   return (a.isOnline > b.isOnline);
@@ -124,7 +124,7 @@ std::vector<std::string> split_to_tokens(std::string command){
 }
 
 
-std::map<std::string, std::string> split_to_kwargs(std::vector<std::string>& args) {
+params split_to_kwargs(std::vector<std::string>& args) {
     std::map<std::string, std::string> kwargs;
     for (int i = 0; i < args.size(); i++) {
         if (args[i][0] == '-') {
