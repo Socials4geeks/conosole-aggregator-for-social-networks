@@ -8,7 +8,7 @@
 
 class Storage;
 class Handler;
-struct Serialisator;
+struct Serializator;
 
 /**
     @class Storage
@@ -32,9 +32,10 @@ class Storage {
     /// Конструктор, заполняющий буфер данными
     Storage( void* data, size_t bytes );
     /// Сохраняет bytes байтов данных data и возвращет handle
-    virtual Handle save( void* data, size_t bytes ) = 0;
+    virtual int Set( std::string key, void* data, size_t bytes ) = 0;
     /// Возвращает указатель на загруженный объект данных
-    virtual void* load( Handle &obj ) = 0;
+    virtual int Get( std::string key, void*& data, size_t& bytes ) = 0;
+    ~Storage();
 };
 
 /**
@@ -53,6 +54,8 @@ class Handler {
     virtual void close() = 0;
     /// Открыт ли объект хранилища
     virtual bool is_open() = 0;
+    virtual void write(void* data, size_t size) = 0;
+    virtual void read(void*& data, size_t& size) = 0;
 };
 
 /**
