@@ -9,7 +9,7 @@ public:
 
 private:
     
-    std::vector<  >
+    std::vector<APIInterface> apiInterfaces;
 
 };
 
