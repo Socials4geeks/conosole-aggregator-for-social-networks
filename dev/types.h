@@ -33,7 +33,7 @@ typedef struct {
 typedef struct {
     std::string IdOfRemoteAccount;
     typeOfResponse Type;
-    std::map< std::string, std::vector< std::string > > Params;
+    std::vector< params > Params;
 } Response;
 
 typedef enum {
