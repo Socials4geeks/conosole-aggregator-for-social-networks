@@ -1,11 +1,11 @@
-#aifndef types_h
+#ifndef types_h
 #define types_h
 
-typedef < std::pair< std::string, std::string > > authInfo;
+typedef std::pair< std::string, std::string > authInfo;
 
 typedef std::map< std::string, std::string > params;
 
-typedef enum{
+typedef enum {
     SHOW_MESSAGES,
     SHOW_WALL,
     SHOW_FRIENDS,
