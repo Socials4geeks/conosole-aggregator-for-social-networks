@@ -16,8 +16,8 @@ Response Implementer::ExecuteRequest( Request request ) {  //Split on basic func
     if ( request.params["socialnetworkname"] == "") {
         if( False ) { //if request.action in allowed actions of basic functions
             basicFunctional( request );
-        };
-    else {
+        }
+    }else {
         if (apiInterface.find( request.params[ "socialnetwork" ] ) != apiInterface.end() ) {
             APIInterface curApiInterface = apiInterface[ request.params["socialnetwork"] ];
             authInfo loginPassword = std::make_pair( request.params[ "RemoteLogin" ], request.params[ "RemotePassword" ] );
