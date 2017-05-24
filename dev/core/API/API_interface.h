@@ -2,6 +2,7 @@
 #define API_Interface_h
 
 #include <map>
+#include <string>
 
 #include "core/API/APIs.h"
 
@@ -13,15 +14,15 @@ public:
     /// Показывает n последних сообщений от пользователя user
     status ShowMessages( authInfo loginPassword, response& Response ) = 0;
     /// TODO
-    status AddFriend(authInfo loginPassword, size_t idOfFriend, response& Response ) = 0; 
+    status AddFriend(authInfo loginPassword, std::string idOfFriend, response& Response ) = 0;
     /// TODO
     status GetFriends(authInfo loginPassword, response& Response ) = 0;
     /// TODO
-    status DeleteFriend(authInfo loginPassword, size_t idOfFriend, response& Response ) = 0;
+    status DeleteFriend(authInfo loginPassword, std::string idOfFriend, response& Response ) = 0;
     /// TODO
     status GetWall( authInfo loginPassword, response& Response ) = 0;
     /// TODO
-    status AddWall( authInfo loginPassword, std::string text  ) = 0; //Replace std::string text to special struct for each SN
+    status AddWall( authInfo loginPassword, std::string text  ) = 0;  // TODO: Replace std::string text to special struct for each SN
     /// TODO
 
 protected:

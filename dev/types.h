@@ -1,11 +1,11 @@
 #aifndef types_h
 #define types_h
 
-typedef authInfo < std::pair< std::string, std::string > > 
+typedef < std::pair< std::string, std::string > > authInfo;
 
-typedef params std::map< std::string, std::string >
+typedef std::map< std::string, std::string > params;
 
-typedef typeOdAction enum{
+typedef enum{
     SHOW_MESSAGES,
     SHOW_WALL,
     SHOW_FRIENDS,
@@ -13,33 +13,32 @@ typedef typeOdAction enum{
     ADD_WALL,
     ADD_FRIEND,
     REMOVE_FRIEND
-}
+} typeOfAction;
 
-
-typedef typeOfResponse enum {
+typedef enum {
     MESSAGES,
     WALL,
     FRIENDS,
     LOGIN_STATUS,
     ACCEPT,
     ERROR,
-}
+} typeOfResponse; 
 
-typedef Request struct {
+typedef struct {
     std::string IdOfRemoteAccount;
     typeOfAction Action;
     params Params;
-}
+} Request;
 
-typedef Response struct {
+typedef struct {
     std::string IdOfRemoteAccount;
     typeOfResponse Type;
     std::vector< params > Params;
-}
+} Response;
 
-typedef status enum {
+typedef enum {
     OK,
     ERROR
-};
+} status;
 
 #endif /* types_h */

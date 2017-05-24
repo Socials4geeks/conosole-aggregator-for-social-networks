@@ -1,4 +1,4 @@
-#include "interface_basic.h"
+#include "interfaces/interface_basic.h"
 
 InterfaceBasic::InterfaceBasic(){
 
@@ -8,19 +8,24 @@ InterfaceBasic::~InterfaceBasic(){
 
 };
 
-int InterfaceBasic::PrintMessages( std::map<std::string, std::string> data ){
-    //TODO (print login pls)
-    return 0;
+void printLoginNecessity() {
+    std::cout << termcolor::on_red << "Access violation:"
+              << termcolor::reset << " Please, login. Print 'help' for help." << std::endl;
+}
+
+int InterfaceBasic::PrintMessages( std::vector<Message> data ){
+    printLoginNecessity();
+    return 1;
 };
 
-int InterfaceBasic::PrintWall( std::map<std::string, std::string> data ){
-    //TODO (-N-)
-    return 0;
+int InterfaceBasic::PrintWall( std::vector<WallEntry> data ){
+    printLoginNecessity();
+    return 1;
 };
 
-int InterfaceBasic::PrintFriends( std::map<std::string, std::string> data ){
-    //TODO (-N-)
-    return 0;
+int InterfaceBasic::PrintFriends( std::vector<FriendEntry> data ){
+    printLoginNecessity();
+    return 1;
 };
 
 
