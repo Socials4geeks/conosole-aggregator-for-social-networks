@@ -1,6 +1,8 @@
 #include "core/interfaces/interface_typical.h"
 #include "core/request.h"
 #include "core/interfaces/interfaces.h"
+#include <stdexcept>
+
 
 InterfaceTypical::InterfaceTypical() {
 
@@ -67,22 +69,72 @@ std::vector<std::string> split(const std::string &s, char delim) {
 }
 
 
-Request InterfaceTypical::Input() {
-    std::string input;
-    std::string account, command;
-    while(true) {
-        std::getline(std::cin, input);
+vector<string> split_in_args(std::string command){
+    vector<string> qargs;
+    int len = command.length();
+    bool qot = false, sqot = false;
+    int arglen;
+    for (int i = 0; i < len; i++) {
+        int start = i;
+        if(command[i] == '\"')
+            qot = true;
+        else if (command[i] == '\'')
+            sqot = true;
+        else if (command[i] == ' ')
+            ;
+        if (qot) {
+            i++;
+            start++;
+            while (i < len && command[i] != '\"')
+                i++;
+            if (i < len)
+                qot = false;
+            arglen = i - start;
+            i++;
+        } else if (sqot) {
+            i++;
+            while (i < len && command[i] != '\'')
+                i++;
+            if (i < len)
+                sqot = false;
+            arglen = i - start;
+            i++;
+        } else {
+            while (i < len && command[i] != ' ')
+                i++;
+            arglen = i - start;
+        }
+        qargs.push_back(command.substr(start, arglen));
+    }
+    if (qot || sqot)
+        throw std::invalid_argument( "Invalid syntax, quotes must be closed." );
+    return qargs;
+}
 
-        std::istringstream in(input);
+
+Request InterfaceTypical::Input() {
+    std::string line;
+    std::string account, command;
+    Request request;
+    while(true) {
+        std::getline(std::cin, line);
+
+        std::istringstream in(line);
         in >> account;
         in >> command;
-        // Request request;
-        // request.account = account;
-        // request.command = command;
         if (account == "" || command == "") {
             std::cout << termcolor::red << "Syntax error." << termcolor::reset << " Type 'help' for help" << std::endl;
             continue;
+        request.account = account;
+        request.command = command;
+
+        if (line.peek() == EOF)
+            
         }
+
+
+        std::string args;
+        std::getline(in, args);
 
         std::cout << account << std::endl;
         std::cout << command;
