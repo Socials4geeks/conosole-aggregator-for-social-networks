@@ -1,7 +1,10 @@
 #ifndef types_h
 #define types_h
 
-typedef < std::pair< std::string, std::string > > authInfo;
+#include <map>
+#include <vector>
+
+typedef std::pair< std::string, std::string > authInfo;
 
 typedef std::map< std::string, std::string > params;
 

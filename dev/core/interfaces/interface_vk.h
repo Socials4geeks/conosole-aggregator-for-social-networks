@@ -3,10 +3,7 @@
 
 #include <iostream>
 #include "termcolor.h"
-#include "core/message.h"
-#include "core/friend_entry.h"
-#include "core/wall_entry.h"
-#include "core/request.h"
+#include "types.h"
 #include "core/interfaces.h"
 #include <vector>
 #include <algorithm>
@@ -19,11 +16,11 @@ public:
     InterfaceVK();
     ~InterfaceVK();
 
-    int PrintMessages( std::vector<Message> data );
-    int PrintWall( std::vector<WallEntry> data );
-    int PrintFriends( std::vector<FriendEntry> data );
+    int PrintMessages( std::vector<std::map<std::string, std::string>> data );
+    int PrintWall( std::vector<std::map<std::string, std::string>> data );
+    int PrintFriends( std::vector<std::map<std::string, std::string>> data );
 
-    Request Input();
+    virtual Request Input();
 };
 
 #endif /* interface_vk_h */

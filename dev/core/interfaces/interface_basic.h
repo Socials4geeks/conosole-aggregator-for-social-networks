@@ -3,9 +3,7 @@
 
 #include <iostream>
 #include "termcolor.h"
-#include "core/message.h"
-#include "core/friend_entry.h"
-#include "core/wall_entry.h"
+#include "types.h"
 #include "interfaces.h"
 #include <vector>
 
@@ -17,6 +15,8 @@ public:
     int PrintMessages( std::vector<std::map<std::string, std::string>> data );
     int PrintFriends( std::vector<std::map<std::string, std::string>> data );
     int PrintWall( std::vector<std::map<std::string, std::string>> data );
+
+    Request Input();
 };
 
 #endif /* interface_basic_h */

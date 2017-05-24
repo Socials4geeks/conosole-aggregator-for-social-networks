@@ -13,39 +13,46 @@ InterfaceTypical::~InterfaceTypical() {
 
 };
 
+int InterfaceTypical::PrintWall( std::vector<std::map<std::string, std::string>> data ) {
+
+}
+
+int InterfaceTypical::PrintFriends( std::vector<std::map<std::string, std::string>> data ) {
+
+}
 
 int InterfaceTypical::PrintMessages( std::vector<std::map<std::string, std::string>> data ) {
-    for (int i = 0 ; i < data.size(); i++) {
-        std::cout << termcolor::reset << "[" << data[i].datetime << "] "
-                  << termcolor::colorizeStringByHash(data[i].username) << termcolor::reset << ": ";
-        if (data[i].title != "") {
-            std::cout << termcolor::bold << data[i].title << termcolor::reset << std::endl;
-        }
-        std::cout << data[i].body << std::endl;
-    }
-    return 0;
-};
+//     for (int i = 0 ; i < data.size(); i++) {
+//         std::cout << termcolor::reset << "[" << data[i].datetime << "] "
+//                   << termcolor::colorizeStringByHash(data[i].username) << termcolor::reset << ": ";
+//         if (data[i].title != "") {
+//             std::cout << termcolor::bold << data[i].title << termcolor::reset << std::endl;
+//         }
+//         std::cout << data[i].body << std::endl;
+//     }
+//     return 0;
+// };
 
-int InterfaceTypical::PrintWall( std::vector<std::map<std::string, std::string>> data ){
-    std::cout << termcolor::on_red << "Access violation:"
-              << termcolor::reset << " Unavailable in current version." << std::endl;
-    return 0;
-};
+// int InterfaceTypical::PrintWall( std::vector<std::map<std::string, std::string>> data ){
+//     std::cout << termcolor::on_red << "Access violation:"
+//               << termcolor::reset << " Unavailable in current version." << std::endl;
+//     return 0;
+// };
 
 
-int InterfaceTypical::PrintFriends( std::vector<std::map<std::string, std::string>> data ){
-    std::sort(data.begin(), data.end(), 
-              [](const FriendEntry & a, const FriendEntry & b) -> bool { 
-                  return (a.isOnline > b.isOnline);
-              });
+// int InterfaceTypical::PrintFriends( std::vector<std::map<std::string, std::string>> data ){
+//     std::sort(data.begin(), data.end(), 
+//               [](const FriendEntry & a, const FriendEntry & b) -> bool { 
+//                   return (a.isOnline > b.isOnline);
+//               });
 
-    for (int i = 0; i < data.size(); i++) {
-        if (data[i].isOnline) {
-            std::cout << termcolor::green << data[i].username << termcolor::reset << ": online" << std::endl;
-        } else {
-            std::cout << termcolor::red << data[i].username << termcolor::reset << ": " << data[i].lastEnter << std::endl;
-        }
-    }
+//     for (int i = 0; i < data.size(); i++) {
+//         if (data[i].isOnline) {
+//             std::cout << termcolor::green << data[i].username << termcolor::reset << ": online" << std::endl;
+//         } else {
+//             std::cout << termcolor::red << data[i].username << termcolor::reset << ": " << data[i].lastEnter << std::endl;
+//         }
+//     }
 
     return 0;
 };
@@ -69,8 +76,8 @@ std::vector<std::string> split(const std::string &s, char delim) {
 }
 
 
-vector<string> split_to_tokens(std::string command){
-    vector<string> qargs;
+std::vector<std::string> split_to_tokens(std::string command){
+    std::vector<std::string> qargs;
     int len = command.length();
     bool qot = false, sqot = false;
     int arglen;
@@ -140,17 +147,18 @@ Request InterfaceTypical::Input() {
         if (account == "" || command == "") {
             std::cout << termcolor::red << "Syntax error." << termcolor::reset << " Type 'help' for help" << std::endl;
             continue;
+        }
         request.IdOfRemoteAccount = account;
         request.Action = command;
-
-        if (line.peek() == EOF)
+        if (in.peek() == EOF) {
             break;
         } else {
             std::string args_str;
             std::getline(in, args_str);
-            std::vector<std::vector> args_vec = split_to_tokens(args_str);
+            auto args_vec = split_to_tokens(args_str);
             std::map<std::string, std::string> kwargs = split_to_kwargs(args_vec);
             request.Params = kwargs;
+            break;
         }
     }
     return request;
