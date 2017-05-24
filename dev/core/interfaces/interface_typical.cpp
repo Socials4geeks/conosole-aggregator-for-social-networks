@@ -38,6 +38,7 @@ int InterfaceTypical::PrintMessages( params data ) {
     return 0;
 };
 
+
 int InterfaceTypical::PrintWall( params data ){
     std::cout << termcolor::on_red << "Access violation:"
               << termcolor::reset << " Unavailable in current version." << std::endl;

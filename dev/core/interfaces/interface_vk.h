@@ -16,9 +16,9 @@ public:
     InterfaceVK();
     ~InterfaceVK();
 
-    int PrintMessages( std::vector<std::map<std::string, std::string>> data );
-    int PrintWall( std::vector<std::map<std::string, std::string>> data );
-    int PrintFriends( std::vector<std::map<std::string, std::string>> data );
+    int PrintMessages( params data );
+    int PrintWall( params data );
+    int PrintFriends( params data );
 
     virtual Request Input();
 };

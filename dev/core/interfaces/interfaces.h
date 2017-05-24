@@ -11,9 +11,9 @@ public:
     ~Interface();
 
     int PrintHello();
-    virtual int PrintMessages( std::vector<std::map<std::string, std::string>> data ) = 0;
-    virtual int PrintWall( std::vector<std::map<std::string, std::string>> data ) = 0;
-    virtual int PrintFriends( std::vector<std::map<std::string, std::string>> data ) = 0;
+    virtual int PrintMessages( params data ) = 0;
+    virtual int PrintWall( params data ) = 0;
+    virtual int PrintFriends( params data ) = 0;
 
     virtual Request Input() = 0;
 };
