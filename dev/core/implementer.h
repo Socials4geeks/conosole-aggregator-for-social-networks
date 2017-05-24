@@ -9,7 +9,8 @@ public:
 
 private:
     
-    std::vector<  >
+    BasicFunctions basicFunctional;
+    std::map< std::string, APIInterface  > apiInterfaces;
 
 };
 
