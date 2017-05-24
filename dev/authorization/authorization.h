@@ -1,7 +1,7 @@
 #ifndef authorization_h
 #define authorization_h
 
-typedef std::pair< std::string, std::string > authInfo
+#include "types.h"
 
 class Authorizator {
 public:
@@ -14,7 +14,7 @@ public:
 
 private:
 
-    std::vector< authInfo > users // Вектор из пар логин-паролей
+    std::vector< authInfo > users; // Вектор из пар логин-паролей
 };
 
 #endif /*authorization_h*/
