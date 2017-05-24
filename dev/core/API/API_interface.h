@@ -5,38 +5,27 @@
 
 #include "core/API/APIs.h"
 
-class APIInterface : API {
+class APIInterface {
 public:
-    APIInterface() : api();
-    /// Залогинивает пользователя с login, password
-    status Login( std::string login, std::string password ) = 0;
-    /// Разлогинивает текущего пользователя
-    status Logout() = 0;
+    APIInterface();
     /// Отправляет сообщение от текущего пользователя, если авторизован
-    status SendMessage( std::map<std::string, std::string> params ) = 0;
+    status SendMessage( authInfo loginPassword,  std::string topic, std::string text, std::string recipient, response& Response ) = 0;
     /// Показывает n последних сообщений от пользователя user
-    status ShowMessages( std::map<std::string, std::string> params ) = 0;
+    status ShowMessages( authInfo loginPassword, response& Response ) = 0;
     /// TODO
-    status AddFriend( std::map<std::string, std::string> params ) = 0;
+    status AddFriend(authInfo loginPassword, size_t idOfFriend, response& Response ) = 0; 
     /// TODO
-    status GetFriends( std::map<std::string, std::string> params ) = 0;
+    status GetFriends(authInfo loginPassword, response& Response ) = 0;
     /// TODO
-    status DeleteFriend( std::map<std::string, std::string> params ) = 0;
+    status DeleteFriend(authInfo loginPassword, size_t idOfFriend, response& Response ) = 0;
     /// TODO
-    status GetWall( std::map<std::string, std::string> params ) = 0;
+    status GetWall( authInfo loginPassword, response& Response ) = 0;
     /// TODO
-    status PostWall( std::map<std::string, std::string> params ) = 0;
+    status AddWall( authInfo loginPassword, std::string text  ) = 0; //Replace std::string text to special struct for each SN
     /// TODO
-    status ( std::map<std::string, std::string> params ) = 0;
-    // TODO
 
 protected:
-    /// Статусы возврата функций
-    API api;
-    enum status {
-        OK,
-        ERROR,
-    };
+    std::vector< API > apis;
 };
 
 

@@ -1,8 +1,6 @@
-#include "authorisation/authorization.h"
+#include "authorization/authorization.h"
     
-Authorizator::Authorizator() {
-    users = Core.storage.Pop( "LoginsPasswords" ) //TODO обращение к кору такое себе
-}
+Authorizator::Authorizator(std::vector < authInfo > UsersFromStorage ): users( UsersFromStorage ) { };
 
 Authorizator::~Authorizator() {
     Core.storage.Push( "LoginsPasswords", users )  //TODO обращение к кору такое себе
