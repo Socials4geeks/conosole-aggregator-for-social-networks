@@ -17,9 +17,9 @@ public:
     InterfaceTypical();
     ~InterfaceTypical();
 
-    int PrintMessages( std::vector<std::map<std::string, std::string>> data );
-    int PrintWall( std::vector<std::map<std::string, std::string>> data );
-    int PrintFriends( std::vector<std::map<std::string, std::string>> data );
+    int PrintMessages( std::vector<std::map<std::string, std::string> > data );
+    int PrintWall( std::vector<std::map<std::string, std::string> > data );
+    int PrintFriends( std::vector<std::map<std::string, std::string> > data );
 
     Request Input();
 };

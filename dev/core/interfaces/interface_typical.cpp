@@ -6,45 +6,50 @@
 
 InterfaceTypical::InterfaceTypical() {
 
-};
+}
 
 
 InterfaceTypical::~InterfaceTypical() {
 
+}
+
+int InterfaceTypical::PrintWall( std::vector<std::map<std::string, std::string> > data ) {
+
+}
+
+int InterfaceTypical::PrintFriends( std::vector<std::map<std::string, std::string> > data ) {
+
+}
+
+int InterfaceTypical::PrintMessages( std::vector<std::map<std::string, std::string> > data ) {
+    if (data.Type == typeOfResponse.ERROR) {
+        std::string reason = data[0].at("reason");
+        std::cout << termcolor::red << reason << termcolor::reset << " Type 'help' for help" << std::endl;
+
+    }
+    for (int i = 0 ; i < data.size(); i++) {
+        std::cout << termcolor::reset << "[" << data[i].at("datetime") << "] "
+                  << termcolor::colorizeStringByHash(data[i].at("username")) << termcolor::reset << ": ";
+        if (data[i].at("title") != "") {
+            std::cout << termcolor::bold << data[i].at("title") << termcolor::reset << std::endl;
+        }
+        std::cout << data[i].at("body") << std::endl;
+    }
+    return 0;
 };
 
-int InterfaceTypical::PrintWall( std::vector<std::map<std::string, std::string>> data ) {
-
-}
-
-int InterfaceTypical::PrintFriends( std::vector<std::map<std::string, std::string>> data ) {
-
-}
-
-int InterfaceTypical::PrintMessages( std::vector<std::map<std::string, std::string>> data ) {
-//     for (int i = 0 ; i < data.size(); i++) {
-//         std::cout << termcolor::reset << "[" << data[i].datetime << "] "
-//                   << termcolor::colorizeStringByHash(data[i].username) << termcolor::reset << ": ";
-//         if (data[i].title != "") {
-//             std::cout << termcolor::bold << data[i].title << termcolor::reset << std::endl;
-//         }
-//         std::cout << data[i].body << std::endl;
-//     }
-//     return 0;
-// };
-
-// int InterfaceTypical::PrintWall( std::vector<std::map<std::string, std::string>> data ){
-//     std::cout << termcolor::on_red << "Access violation:"
-//               << termcolor::reset << " Unavailable in current version." << std::endl;
-//     return 0;
-// };
+int InterfaceTypical::PrintWall( std::vector<std::map<std::string, std::string> > data ){
+    std::cout << termcolor::on_red << "Access violation:"
+              << termcolor::reset << " Unavailable in current version." << std::endl;
+    return 0;
+};
 
 
-// int InterfaceTypical::PrintFriends( std::vector<std::map<std::string, std::string>> data ){
-//     std::sort(data.begin(), data.end(), 
-//               [](const FriendEntry & a, const FriendEntry & b) -> bool { 
-//                   return (a.isOnline > b.isOnline);
-//               });
+int InterfaceTypical::PrintFriends( std::vector<std::map<std::string, std::string> > data ){
+    std::sort(data.begin(), data.end(), 
+              [](const FriendEntry & a, const FriendEntry & b) -> bool { 
+                  return (a.isOnline > b.isOnline);
+              });
 
 //     for (int i = 0; i < data.size(); i++) {
 //         if (data[i].isOnline) {
@@ -54,8 +59,8 @@ int InterfaceTypical::PrintMessages( std::vector<std::map<std::string, std::stri
 //         }
 //     }
 
-    return 0;
-};
+//     return 0;
+// };
 
 
 template<typename Out>
