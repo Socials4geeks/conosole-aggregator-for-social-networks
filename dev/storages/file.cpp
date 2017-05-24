@@ -1,52 +1,69 @@
 #include "storages/file.h"
 
+#include <string>
+#include <fstream>
+
+#include "types.h"
 // Методы File
 
 File::File( File& file )
 {
-    //TODO
+    handler = new FileHandler();
+    handler = file.handler;
+    delete file.handler;
 }
 
 File::File( File&& file )
 {
-    //TODO
+    handler = file.handler;
 }
 
-Handler File::save( void* data, size_t bytes )
+status File::Set( std::string key, void* data, size_t bytes )
 {
-    Serialiser<fstream> serialiser();
-    void* data = serialiser.encode( data );
-    //TODO
+    handler.set_filename(key);
+    handler.open();
+    handler.write(data, bytes);
+    handler.close();
+    return OK;
 }
 
-void* File::load( Handler &obj )
+status File::Get( std::string key, void*& data, size_t& bytes )
 {
-    //TODO
+    handler.set_filename(key);
+    handler.open();
+    handler.read(data, bytes);
+    handler.close();
+    return OK;
 }
 
 // Методы FileHandler
 
 void FileHandler::open()
 {
-    //TODO
+    file.open(filename, ios::binary | ios::app);
 }
 
 void FileHandler::close()
 {
-    //TODO
+    file.close();
 }
 
-void FileHandler::is_open()
+bool FileHandler::is_open()
 {
-    //TODO
+    return file.is_open();
 }
 
 void FileHandler::set_filename( std::string name )
 {
-    //TODO
+    filename = std::string(root_dir) + name;
 }
 
 std::string FileHandler::get_filename()
 {
-    //TODO
+    return filename;
+}
+
+FileHandler::~FileHandler()
+{
+    file.close();
 }
