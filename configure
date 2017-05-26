@@ -17,7 +17,10 @@ else
       make &&
       cd Binares
       ./test_runner *_test.so &&
-      make install
+      make install &&
+      for h in find -regex '.*\.\(h\|hpp\)'
+          do mv $h include/
+      done
    then
       echo DONE project is success configurated!
    else
