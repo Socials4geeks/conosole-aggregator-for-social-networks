@@ -1,11 +1,12 @@
 #ifndef types_h
 #define types_h
 
-typedef std::pair< std::string, std::string > authInfo;
+typedef std::pair< std::string, std::string > AuthInfo;
 
-typedef std::map< std::string, std::string > params;
+typedef std::map< std::string, std::string > Params;
 
 typedef enum {
+    UNKNOWN,
     SHOW_MESSAGES,
     SHOW_WALL,
     SHOW_FRIENDS,
@@ -13,7 +14,7 @@ typedef enum {
     ADD_WALL,
     ADD_FRIEND,
     REMOVE_FRIEND
-} typeOfAction;
+} TypeOfAction;
 
 typedef enum {
     MESSAGES,
@@ -22,23 +23,31 @@ typedef enum {
     LOGIN_STATUS,
     ACCEPT,
     ERROR,
-} typeOfResponse; 
+} TypeOfResponse; 
 
-typedef struct {
+typedef struct Request {
     std::string IdOfRemoteAccount;
-    typeOfAction Action;
-    params Params;
+    TypeOfAction Action;
+    Params Params;
+    Request() {
+        Action = TypeOfAction::UNKNOWN;
+    }
 } Request;
 
 typedef struct {
     std::string IdOfRemoteAccount;
-    typeOfResponse Type;
-    std::vector< params > Params;
+    TypeOfResponse Type;
+    std::vector< Params > Params;
+    Request() {
+        Type = typeOfResponse::ERROR;
+    }
 } Response;
 
 typedef enum {
     OK,
     ERROR
-} status;
+} Status;
+
+class NotImplementedYet( std::exception ) {};
 
 #endif /* types_h */

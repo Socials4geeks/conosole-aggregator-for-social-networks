@@ -2,60 +2,60 @@
 #include "types.h"
 
 APIInterface::APIInterface() {
-
+    
 }
 
 // TODO: recipient => recipients
-status SendMessage( authInfo loginPassword, std::string topic, std::string text, std::string recipient, response& Response ) {
+status APIInterface::SendMessage( authInfo loginPassword, std::string topic, std::string text, std::string recipient, response& Response ) {
     int uid;
-    status = check_correct_login( loginPassword, Response, uid );
+    status code = checkCorrectLoginPassword( loginPassword, Response, uid );
     if( code == status::OK ) {
-        Response.Type = typeOfResponse::ACCEPT;
+        code = api.SendMessage( topic, text, uid );
+        if( code == status::OK ) {
+            Response.Type = typeOfResponse::ACCEPT;
+        }
     }
-    code = api.SendMessage( topic, text, recipient );
+    return code;
+}
+
+status APIInterface::ShowMessages( authInfo loginPassword, response& Response ) {
+    int uid;
+    status code = checkCorrectLoginPassword( loginPassword, Response, uid );
     if( code == status::OK ) {
+        Response.Params = api.GetLastMessages( uid );
         Response.Type = typeOfResponse::ACCEPT;
     }
     return code;
 }
 
-status ShowMessages( authInfo loginPassword, response& Response ) {
+status APIInterface::AddFriend(authInfo loginPassword, std::string idOfFriend, response& Response ) {
     int uid;
-    status code = check_correct_login( loginPassword, Response, uid );
-    Response.Params = api.SendMessage( topic, text, uid );
-    if( code == status::OK ) {
-        Response.Type = typeOfResponse::ACCEPT;
-    }
-    return code;
+    status code = checkCorrectLoginPassword( loginPassword, Response, uid );
+    throw NotImplementedYet();
 }
 
-status AddFriend(authInfo loginPassword, std::string idOfFriend, response& Response ) {
+status APIInterface::GetFriends(authInfo loginPassword, response& Response ) {
     int uid;
-    status code = check_correct_login( loginPassword, Response, uid );
+    status code = checkCorrectLoginPassword( loginPassword, Response, uid );
+    throw NotImplementedYet();
 }
 
-status GetFriends(authInfo loginPassword, response& Response ) {
+status APIInterface::RemoveFriend(authInfo loginPassword, std::string idOfFriend, response& Response ) {
     int uid;
-    status code = check_correct_login( loginPassword, Response, uid );
-
+    status code = checkCorrectLoginPassword( loginPassword, Response, uid );
+    throw NotImplementedYet();
 }
 
-status RemoveFriend(authInfo loginPassword, std::string idOfFriend, response& Response ) {
+status APIInterface::GetWall( authInfo loginPassword, response& Response ) {
     int uid;
-    status code = check_correct_login( loginPassword, Response, uid );
-
+    status code = checkCorrectLoginPassword( loginPassword, Response, uid );
+    throw NotImplementedYet();
 }
 
-status GetWall( authInfo loginPassword, response& Response ) {
+status APIInterface::AddWall( authInfo loginPassword, std::string text  ) {  // TODO: Replace std::string text to special struct for each SN
     int uid;
-    status code = check_correct_login( loginPassword, Response, uid );
-
-}
-
-status AddWall( authInfo loginPassword, std::string text  ) {  // TODO: Replace std::string text to special struct for each SN
-    int uid;
-    status code = check_correct_login( loginPassword, Response, uid );
-
+    status code = checkCorrectLoginPassword( loginPassword, Response, uid );
+    throw NotImplementedYet();
 }
 
 status APIInterface::checkCorrectLoginPassword( authInfo loginPassword, response& Response, int& uid ) {
@@ -64,14 +64,14 @@ status APIInterface::checkCorrectLoginPassword( authInfo loginPassword, response
         params params;
         params.insert( std::make_pair("reason", "Incorrect login or password") );
         Response.Params.push_back(params);
-        return code;
+        return status::ERROR;
     }
-    status code = login_if_not_logined(uid);
-    return code;
+    return _login_if_not_logined(uid);
 }
 
-void APIInterface::login_if_not_logined( authInfo loginPassword ) {
-    if( !api.authorized(loginPassword) ) {
-        api.authorize(loginPassword);
+status APIInterface::_login_if_not_logined( int uid ) {
+    if( !api.authorized(uid) ) {
+        return api.authorize(uid);
     }
+    return status::OK;
 }
