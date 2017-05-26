@@ -12,10 +12,7 @@ public:
     std::map<std::string, std::string> GetData();
 
 private:
-    enum status {
-        OK,
-        ERROR,
-    };
+
 };
 
 #endif /* APIs_h */
