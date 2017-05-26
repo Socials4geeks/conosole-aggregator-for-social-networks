@@ -3,21 +3,28 @@
 #NOTE: Чтобы собрать дебаг-версию, нужно просто заменить все reliase на debug
 
 UBUNTU_VERSION=$(lsb_release -r | awk '{ print $2 }')
-if [ $(echo "$UBUNTU_VERSION < 16.04" | bc) = 1 ]
+if [ $(echo "$UBUNTU_VERSION < 14.04" | bc) = 1 ]
 then
    echo SORRY, your version of Ubuntu is not supported, please, upgrade your operation system
    exit 1
 else
-   if xargs apt-get -y install < requirements.txt &&
+   if apt-get install software-properties-common &&
+      add-apt-repository ppa:george-edison55/cmake-3.x &&
+      apt-get update &&
+      xargs apt-get -y install < requirements.txt &&
+      apt-get upgrade &&
       git clone https://github.com/Microsoft/cpprestsdk.git casablanca &&
       cd casablanca/Release &&
       mkdir temp.casablanca.build.release &&
       cd temp.casablanca.build.release &&
       CXX=g++-4.8 cmake .. -DCMAKE_BUILD_TYPE=Release &&
       make &&
-      cd Binares
+      cd Binaries
       ./test_runner *_test.so &&
+      cd .. &&
       make install &&
+      cd ../../.. &&
+      rm -rf casablanca &&
       for h in find -regex '.*\.\(h\|hpp\)'
           do mv $h include/
       done
