@@ -1,9 +1,9 @@
 #ifndef types_h
 #define types_h
 
-typedef std::pair< std::string, std::string > AuthInfo;
+typedef std::pair< std::string, std::string > authInfo;
 
-typedef std::map< std::string, std::string > Params;
+typedef std::map< std::string, std::string > params;
 
 typedef enum {
     UNKNOWN,
@@ -28,7 +28,7 @@ typedef enum {
 typedef struct Request {
     std::string IdOfRemoteAccount;
     TypeOfAction Action;
-    Params Params;
+    params Params;
     Request() {
         Action = TypeOfAction::UNKNOWN;
     }
@@ -37,7 +37,7 @@ typedef struct Request {
 typedef struct {
     std::string IdOfRemoteAccount;
     TypeOfResponse Type;
-    std::vector< Params > Params;
+    std::vector< params > Params;
     Request() {
         Type = typeOfResponse::ERROR;
     }
@@ -48,6 +48,31 @@ typedef enum {
     ERROR
 } Status;
 
-class NotImplementedYet( std::exception ) {};
+class NotImplementedYet : public std::exception {};
+
+struct TemporaryBrowserAuthorisation : public std::exception {
+    TemporaryBrowserAuthorisation( std::string& access_token ) : access_token(access_token);
+    std::string& access_token;
+    std::stirng authorisation_url;
+};
+
+typedef enum {
+    NOT_DEFINED,
+    WOMEN,
+    MEN
+} Sex;
+
+struct ProfileInfo {
+    int uid;
+    std::string first_name;
+    std::string last_name;
+    std::string screen_name;
+    Sex sex;
+    std::string home_town;
+    std::string country;
+    std::string city;
+    std::string status;
+    std::string phone;
+};
 
 #endif /* types_h */
