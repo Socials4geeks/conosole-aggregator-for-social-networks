@@ -1,4 +1,4 @@
-#include "interfaces/interfaces.h"
+#include "core/interfaces/interfaces.h"
 
 Interface::Interface() {
     //TODO

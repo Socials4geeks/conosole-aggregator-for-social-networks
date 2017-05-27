@@ -1,20 +1,24 @@
 #ifndef interfaces_h
 #define interfaces_h
 
-#include "core/message.h"
-#include "core/friend_entry.h"
-#include "core/wall_entry.h"
 #include <vector>
+#include <map>
+#include "types.h"
 
 class Interface {
 public:
     Interface();
     ~Interface();
 
+    const std::string name_of_social_network;
+    
     int PrintHello();
-    virtual int PrintMessages( std::vector<Message> data ) = 0;
-    virtual int PrintWall( std::vector<WallEntry> data ) = 0;
-    virtual int PrintFriends( std::vector<FriendEntry> data ) = 0;
+    virtual int PrintMessages( Response data ) = 0;
+    virtual int PrintWall( Response data ) = 0;
+    virtual int PrintFriends( Response data ) = 0;
+
+
+    virtual Request Input() = 0;
 };
 
 #endif /* interfaces_h */
