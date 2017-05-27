@@ -19,7 +19,7 @@ Response Implementer::ExecuteRequest( Request request ) {  //TODO: Split on basi
     }else {
         if (apiInterface.find( request.params[ "SOCIAL_NETWORK_NAME" ] ) != apiInterface.end() ) {
             APIInterface curApiInterface = apiInterface[ request.params["SOCIAL_NETWORK_NAME"] ];
-            authInfo loginPassword = std::make_pair( request.params[ "REMOTE_LOGIN" ], request.params[ "REMOTE_LOGIN" ] );
+            authInfo loginPassword = std::make_pair( request.params[ "REMOTE_LOGIN" ], request.params[ "REMOTE_PASSWORD" ] );
             switch ( request.action ){
                 case (SHOW_MESSAGES):{
                     curApiInterface.ShowMessages( loginPassword, newResponse ) //TODO: Analyse return code

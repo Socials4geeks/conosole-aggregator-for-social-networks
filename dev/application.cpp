@@ -46,10 +46,14 @@ void Application::output( Response response ) {
                 default:
                     curUi->PrintError( response );
                     break;
+            } 
+            break;
          default:
              curUi = &ui[0];
-             curUi->PrintError();
+             curUi->PrintError( response );
              break;
+    }
+        
     Request request = curUi->Input();
     executeRequest( request );
 

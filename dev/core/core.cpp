@@ -36,9 +36,9 @@ Response Core::ExecuteRequest( Request request  ) {
         case ADD_WALL:
         case ADD_FRIEND:
         case REMOVE_FRIEND:
-            authInfo tmp = ActionSession.GetAuthForApi( request.Params[ "SOCIAL_NETWORK_NAME" ]; //Handle exception NoAuthData
-            request.Params[ "REMOTE_LOGIN" ] = tmp.first();
-            request.Params[ "REMOTE_PASSWORD" ] = tmp.second();
+            authInfo tmp = ActiveSession.GetAuthForApi( request.Params[ "SOCIAL_NETWORK_NAME" ]; //Handle exception NoAuthData
+            request.Params[ "REMOTE_LOGIN" ] = tmp.first;
+            request.Params[ "REMOTE_PASSWORD" ] = tmp.second;
             response = implementer.ExecuteRequest( request );
             return response;
             break;
