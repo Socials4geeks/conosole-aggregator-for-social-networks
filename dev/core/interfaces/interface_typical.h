@@ -11,7 +11,6 @@
 #include <map>
 
 
-
 class InterfaceTypical : public Interface {
 public:
     InterfaceTypical();

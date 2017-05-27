@@ -4,9 +4,7 @@
 #include <stdexcept>
 
 
-InterfaceTypical::InterfaceTypical() {
-    name_of_social_network = "typical social network";
-}
+InterfaceTypical::InterfaceTypical(): name_of_social_network("") {}
 
 
 InterfaceTypical::~InterfaceTypical() {
@@ -15,7 +13,7 @@ InterfaceTypical::~InterfaceTypical() {
 
 int InterfaceTypical::PrintWall( Response data ) {
     std::cout << termcolor::on_red << "Access violation:"
-          << termcolor::reset << " Please, login. Print 'help' for help." << std::endl;
+              << termcolor::reset << " Please, login. Print 'help' for help." << std::endl;
 }
 
 

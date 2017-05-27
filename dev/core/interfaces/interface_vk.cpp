@@ -3,9 +3,7 @@
 #include "core/interfaces/interfaces.h"
 #include "termcolor.h"
 
-InterfaceVK::InterfaceVK() {
-    name_of_social_network = "vk";
-};
+InterfaceVK::InterfaceVK(): name_of_social_network(vk) {};
 
 
 InterfaceVK::~InterfaceVK() {

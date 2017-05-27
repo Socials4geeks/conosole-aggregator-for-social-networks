@@ -10,7 +10,6 @@
 #include <sstream>
 
 
-
 class InterfaceVK : public InterfaceTypical {
 public:
     InterfaceVK();
