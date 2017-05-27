@@ -13,17 +13,17 @@ void printLoginNecessity() {
               << termcolor::reset << " Please, login. Print 'help' for help." << std::endl;
 }
 
-int InterfaceBasic::PrintMessages( std::vector<Message> data ){
+int InterfaceBasic::PrintMessages( Response data ){
     printLoginNecessity();
     return 1;
 };
 
-int InterfaceBasic::PrintWall( std::vector<WallEntry> data ){
+int InterfaceBasic::PrintWall( Response data ){
     printLoginNecessity();
     return 1;
 };
 
-int InterfaceBasic::PrintFriends( std::vector<FriendEntry> data ){
+int InterfaceBasic::PrintFriends( Response data ){
     printLoginNecessity();
     return 1;
 };

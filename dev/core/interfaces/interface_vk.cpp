@@ -12,7 +12,7 @@ InterfaceVK::~InterfaceVK() {
 };
 
 
-int InterfaceVK::PrintMessages( params data ) {
+int InterfaceVK::PrintMessages( Response data ) {
     // for (int i = 0 ; i < data.size(); i++) {
     //     std::cout << termcolor::reset << "[" << data[i].datetime << "] "
     //               << termcolor::colorizeStringByHash(data[i].username) << termcolor::reset << ": ";
@@ -24,14 +24,14 @@ int InterfaceVK::PrintMessages( params data ) {
     // return 0;
 };
 
-int InterfaceVK::PrintWall( params data ){
+int InterfaceVK::PrintWall( Response data ){
     std::cout << termcolor::on_red << "Access violation:"
               << termcolor::reset << " Unavailable in current version." << std::endl;
     return 0;
 };
 
 
-int InterfaceVK::PrintFriends( params data ){
+int InterfaceVK::PrintFriends( Response data ){
     // std::sort(data.begin(), data.end(), 
     //           [](const FriendEntry & a, const FriendEntry & b) -> bool { 
     //               return (a.isOnline > b.isOnline);

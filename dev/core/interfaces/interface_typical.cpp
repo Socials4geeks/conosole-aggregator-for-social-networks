@@ -13,15 +13,15 @@ InterfaceTypical::~InterfaceTypical() {
 
 }
 
-int InterfaceTypical::PrintWall( params data ) {
+int InterfaceTypical::PrintWall( Response data ) {
 
 }
 
-int InterfaceTypical::PrintFriends( params data ) {
+int InterfaceTypical::PrintFriends( Response data ) {
 
 }
 
-int InterfaceTypical::PrintMessages( params data ) {
+int InterfaceTypical::PrintMessages( Response data ) {
     if (data.Type == typeOfResponse.ERROR) {
         std::string reason = data[0].at("reason");
         std::cout << termcolor::red << reason << termcolor::reset << " Type 'help' for help" << std::endl;
@@ -39,18 +39,18 @@ int InterfaceTypical::PrintMessages( params data ) {
 };
 
 
-int InterfaceTypical::PrintWall( params data ){
+int InterfaceTypical::PrintWall( Response data ){
     std::cout << termcolor::on_red << "Access violation:"
               << termcolor::reset << " Unavailable in current version." << std::endl;
     return 0;
 };
 
 
-int InterfaceTypical::PrintFriends( params data ){
-    std::sort(data.begin(), data.end(), 
-              [](const FriendEntry & a, const FriendEntry & b) -> bool { 
-                  return (a.isOnline > b.isOnline);
-              });
+// int InterfaceTypical::PrintFriends( Response data ){
+//     std::sort(data.begin(), data.end(), 
+//               [](const FriendEntry & a, const FriendEntry & b) -> bool { 
+//                   return (a.isOnline > b.isOnline);
+//               });
 
 //     for (int i = 0; i < data.size(); i++) {
 //         if (data[i].isOnline) {

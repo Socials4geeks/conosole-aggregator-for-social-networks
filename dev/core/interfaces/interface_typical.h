@@ -17,9 +17,9 @@ public:
     InterfaceTypical();
     ~InterfaceTypical();
 
-    int PrintMessages( params data );
-    int PrintWall( params data );
-    int PrintFriends( params data );
+    int PrintMessages( Response data );
+    int PrintWall( Response data );
+    int PrintFriends( Response data );
 
     Request Input();
 };

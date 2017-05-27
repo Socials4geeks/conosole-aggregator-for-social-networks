@@ -12,9 +12,9 @@ public:
     InterfaceBasic();
     ~InterfaceBasic();
 
-    int PrintMessages( params data );
-    int PrintFriends( params data );
-    int PrintWall( params data );
+    int PrintMessages( Response data );
+    int PrintFriends( Response data );
+    int PrintWall( Response data );
 
     Request Input();
 };

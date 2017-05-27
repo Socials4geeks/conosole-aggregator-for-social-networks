@@ -11,9 +11,9 @@ public:
     ~Interface();
 
     int PrintHello();
-    virtual int PrintMessages( params data ) = 0;
-    virtual int PrintWall( params data ) = 0;
-    virtual int PrintFriends( params data ) = 0;
+    virtual int PrintMessages( Response data ) = 0;
+    virtual int PrintWall( Response data ) = 0;
+    virtual int PrintFriends( Response data ) = 0;
 
     virtual Request Input() = 0;
 };
