@@ -4,6 +4,9 @@
 #include <utility>
 #include <vector>
 #include <string>
+#include <map>
+
+#include "types.h"
 
 typedef std::pair<std::string, std::string> LoginPassword;
 typedef std::pair<std::string, LoginPassword> AuthInfo; // First string is social network's name
