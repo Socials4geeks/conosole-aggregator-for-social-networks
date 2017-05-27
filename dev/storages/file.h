@@ -1,13 +1,17 @@
 #include "storages/storage.h"
 
+#include <string>
+#include <fstream>
+
+#include "types.h"
 /**
     @class File
     Хранилище на файловой системе
 **/
 
+const char root_dir[] = "/tmp/storages/"
+
 class File : public Storage {
-  provate:
-    FileHandler* handler;
   public:
     File() : Storage(), handler(nullptr) {};
     /// Аллоцирующий конструктор, выделяющий сразу size байт под данные
@@ -18,10 +22,12 @@ class File : public Storage {
     File( Serialisator* serialisator ) : Storage( serialisator ), handler(nullptr) {};
     File( File& file );
     File( File&& file );
-    /// Сохраняет bytes байтов данных data и возвращет handle
-    virtual Handler save( void* data, size_t bytes );
-    /// Возвращает указатель на загруженный объект данных
-    virtual void* load( Handler &obj );
+    /// Сохраняет bytes байтов данных data по ключу key
+    virtual status Set( std::string key, void* data, size_t bytes );
+    /// Возвращает указатель на загруженный объект данных по ключу key
+    virtual status Get( std::string key, void*& data, size_t bytes );
+  private:
+    FileHandler* handler;
 };
 
 /**
@@ -30,9 +36,6 @@ class File : public Storage {
 **/
 
 class FileHandler : Handler {
-  protected:
-    FILE* handler;
-    std::string filename;
   public:
     void FileHandler() : Handler(), handler(nullptr), filename("") {};
     /// Конструктор, инициализирующий название файла
@@ -45,4 +48,9 @@ class FileHandler : Handler {
     virtual void close();
     /// Открыт ли объект хранилища
     virtual void is_open();
+    virtual void write(void* data, size_t size);
+    virtual void read(void*& data, size_t& size);
+  protected:
+    fstream file;
+    std::string filename;
 };
