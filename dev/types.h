@@ -3,10 +3,11 @@
 
 #include <map>
 #include <vector>
+#include <ctime>
 
-typedef std::pair< std::string, std::string > authInfo;
+typedef std::pair< std::wstring, std::wstring > authInfo;
 
-typedef std::map< std::string, std::string > params;
+typedef std::map< std::wstring, std::wstring > params;
 
 typedef enum {
     UNKNOWN,
@@ -54,13 +55,12 @@ typedef enum {
     ERROR
 } Status;
 
-class NotImplementedYet : public std::exception {};
 
-struct TemporaryBrowserAuthorisation : public std::exception {
-    TemporaryBrowserAuthorisation( std::string& access_token ) : access_token(access_token);
-    std::string& access_token;
-    std::stirng authorisation_url;
-};
+/// API data structures
+
+typedef std::pair<time_t, std::wstring> TokenInfo;
+
+typedef std::vector< std::pair<std::wstring, std::wstring> > UrlParams;
 
 typedef enum {
     NOT_DEFINED,
@@ -70,15 +70,35 @@ typedef enum {
 
 struct ProfileInfo {
     int uid;
-    std::string first_name;
-    std::string last_name;
-    std::string screen_name;
+    std::wstring first_name;
+    std::wstring last_name;
+    std::wstring screen_name;
     Sex sex;
-    std::string home_town;
-    std::string country;
-    std::string city;
-    std::string status;
-    std::string phone;
+    std::wstring home_town;
+    std::wstring country;
+    std::wstring city;
+    std::wstring status;
+    std::wstring phone;
+};
+
+struct Message {
+    size_t mid;
+    size_t date;
+    bool out;
+    size_t uid;
+    bool read_state;
+    std::wstring title;
+    std::wstring body;
+};
+
+/// Exceptions
+
+class NotImplementedYet : public std::exception {};
+
+struct TemporaryBrowserAuthorisation : public std::exception {
+    TemporaryBrowserAuthorisation( TokenInfo& access_token ) : access_token(access_token);
+    TokenInfo& access_token;
+    std::stirng authorisation_url;
 };
 
 #endif /* types_h */
