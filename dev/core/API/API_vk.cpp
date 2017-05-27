@@ -1,3 +1,5 @@
+#include <cstdio>
+
 #include "core/API/API_vk.h"
 #include "constats.h"
 
