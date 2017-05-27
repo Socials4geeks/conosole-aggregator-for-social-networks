@@ -2,9 +2,7 @@
 
 
 int main(int argc, const char * argv[]) {
-    Application app;
-    app.start();
-    
+    Application app;    
     return 0;
 
 }
