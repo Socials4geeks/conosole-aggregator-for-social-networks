@@ -11,11 +11,6 @@ InterfaceTypical::~InterfaceTypical() {
 
 }
 
-int InterfaceTypical::PrintWall( Response data ) {
-    std::cout << termcolor::on_red << "Access violation:"
-              << termcolor::reset << " Please, login. Print 'help' for help." << std::endl;
-}
-
 
 int InterfaceTypical::PrintMessages( Response data ) {
     if (data.Type == typeOfResponse.ERROR) {
