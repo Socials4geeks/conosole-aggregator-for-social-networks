@@ -13,9 +13,7 @@ Status APIs::is_authorized( int uid ) {
 
 int APIs::GetUserId( AuthInfo loginPassword ) {
     TemporaryBrowserAuthorisation exception( access_token );
-    const std::string STATE = "@#f6kmd;lk#@43J$@@#gj3346sdlkgw";
-    const std::string VERSION = "5.64";
-    exception.authorisation_url = std::string(sprintf(httpFormatString, "https", "oauth.vk.com/authorize"))
+    exception.authorisation_url = std::string(sprintf(httpFormatString, "https", "api.vk.com/authorization"))
         + std::string(sprintf(httpGetParams, "client_id", VK_APP_ID))
         + std::string(sprintf(httpGetParams, "display", "page"))
         + std::string(sprintf(httpGetParams, "scope", "friends")) 
@@ -30,5 +28,13 @@ int APIs::GetUserId( AuthInfo loginPassword ) {
 }
 
 ProfileInfo getProfileInfo() {
-    
+   
+}
+
+Status SendMessage( authInfo loginPassword, std::string topic, std::string text, std::string recipient ) {
+
+}
+
+Params GetLastMessages( int uid ) {
+
 }
