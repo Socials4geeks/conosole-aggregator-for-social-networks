@@ -21,17 +21,17 @@ int InterfaceTypical::PrintWall( Response data ) {
 
 int InterfaceTypical::PrintMessages( Response data ) {
     if (data.Type == typeOfResponse.ERROR) {
-        std::string reason = data[0].at("reason");
-        std::cout << termcolor::red << reason << termcolor::reset << " Type 'help' for help" << std::endl;
+        std::string reason = data.Params[0].at("reason");
+        std::cout << termcolor::red << reason << termcolor::reset << std::endl;
 
     }
     for (int i = 0 ; i < data.Params.size(); i++) {
         std::cout << termcolor::reset << "[" << data.Params[i]["datetime"] << "] "
                   << termcolor::colorizeStringByHash(data.Params[i]["username"]) << termcolor::reset << ": ";
         if (data.Params[i]["title"] != "") {
-            std::cout << termcolor::bold << data[i].Params["title"] << termcolor::reset << std::endl;
+            std::cout << termcolor::bold << data.Params[i]["title"] << termcolor::reset << std::endl;
         }
-        std::cout << data[i].Params["body"] << std::endl;
+        std::cout << data.Params[i]["body"] << std::endl;
     }
     return 0;
 };

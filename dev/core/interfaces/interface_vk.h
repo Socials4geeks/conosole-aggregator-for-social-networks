@@ -19,6 +19,7 @@ public:
     int PrintMessages( Response data );
     int PrintWall( Response data );
     int PrintFriends( Response data );
+    int PrintError( Response data );
 
     virtual Request Input();
 };
