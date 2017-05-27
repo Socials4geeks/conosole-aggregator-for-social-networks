@@ -4,6 +4,9 @@
 #include <utility>
 #include <vector>
 #include <string>
+#include <map>
+
+#include "types.h"
 
 /**
     @class Session
