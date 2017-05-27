@@ -9,15 +9,27 @@ typedef std::pair< std::string, std::string > authInfo;
 typedef std::map< std::string, std::string > params;
 
 typedef enum {
+    SHOW_MESSAGES,
+    SHOW_WALL,
+    SHOW_FRIENDS,
+    SEND_MESSAGE,
+    ADD_WALL,
+    ADD_FRIEND,
+    REMOVE_FRIEND
+} typeOfAction;
+
+typedef enum {
     MESSAGES,
     WALL,
     FRIENDS,
-    LOGIN_STATUS
-} typeOfResponse;
+    LOGIN_STATUS,
+    ACCEPT,
+    ERROR,
+} typeOfResponse; 
 
 typedef struct {
     std::string IdOfRemoteAccount;
-    std::string Action;
+    typeOfAction Action;
     params Params;
 } Request;
 
