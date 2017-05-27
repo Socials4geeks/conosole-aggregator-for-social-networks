@@ -15,18 +15,14 @@ public:
     Application();
     ~Application();
     
-    int Start();
-    
-    
 private:
     Core core;
-    Storage storage;
-    std::vector<Session> sessions;
-    Authorizator authorizator;    
+    std::vector< Interface > ui;
+    Interface* curUi;
+    std::string curSocialNetwork;
     
-    int AddSession( Session successSession );
-    int DeleteSession( Session session );
-
+    void executeRequest( Request request );
+    void output( Response response );
 };
 
 #endif /* Application_h */
