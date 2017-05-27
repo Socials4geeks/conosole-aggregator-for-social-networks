@@ -44,7 +44,7 @@ int InterfaceTypical::PrintFriends( Response data ) {
               });
 
     for (int i = 0; i < data.Params.size(); i++) {
-        if (data[i].Params["isOnline"]) {
+        if (data[i].Params["is_online"]) {
             std::cout << termcolor::green << data[i].Params["username"] << termcolor::reset << ": online" << std::endl;
         } else {
             std::cout << termcolor::red << data[i].Params["username"] << termcolor::reset
