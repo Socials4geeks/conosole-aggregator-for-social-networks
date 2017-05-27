@@ -6,6 +6,9 @@ typedef std::pair< std::string, std::string > authInfo;
 typedef std::map< std::string, std::string > params;
 
 typedef enum {
+    NEW_LOCAL_ACCOUNT,
+    LOGIN_LOCAL_ACCOUNT,
+    LOGOUT_LOCAL_ACCOUNT,
     SHOW_MESSAGES,
     SHOW_WALL,
     SHOW_FRIENDS,
