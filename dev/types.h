@@ -9,6 +9,7 @@ typedef std::pair< std::string, std::string > authInfo;
 typedef std::map< std::string, std::string > params;
 
 typedef enum {
+    UNKNOWN,
     NEW_LOCAL_ACCOUNT,
     LOGIN_LOCAL_ACCOUNT,
     LOGOUT_LOCAL_ACCOUNT,
@@ -19,7 +20,7 @@ typedef enum {
     ADD_WALL,
     ADD_FRIEND,
     REMOVE_FRIEND
-} typeOfAction;
+} TypeOfAction;
 
 typedef enum {
     MESSAGES,
@@ -28,23 +29,56 @@ typedef enum {
     LOGIN_STATUS,
     ACCEPT,
     ERROR,
-} typeOfResponse; 
+} TypeOfResponse; 
 
-typedef struct {
+typedef struct Request {
     std::string IdOfRemoteAccount;
-    typeOfAction Action;
+    TypeOfAction Action;
     params Params;
+    Request() {
+        Action = TypeOfAction::UNKNOWN;
+    }
 } Request;
 
 typedef struct {
     std::string IdOfRemoteAccount;
-    typeOfResponse Type;
+    TypeOfResponse Type;
     std::vector< params > Params;
+    Request() {
+        Type = typeOfResponse::ERROR;
+    }
 } Response;
 
 typedef enum {
     OK,
     ERROR
-} status;
+} Status;
+
+class NotImplementedYet : public std::exception {};
+
+struct TemporaryBrowserAuthorisation : public std::exception {
+    TemporaryBrowserAuthorisation( std::string& access_token ) : access_token(access_token);
+    std::string& access_token;
+    std::stirng authorisation_url;
+};
+
+typedef enum {
+    NOT_DEFINED,
+    WOMEN,
+    MEN
+} Sex;
+
+struct ProfileInfo {
+    int uid;
+    std::string first_name;
+    std::string last_name;
+    std::string screen_name;
+    Sex sex;
+    std::string home_town;
+    std::string country;
+    std::string city;
+    std::string status;
+    std::string phone;
+};
 
 #endif /* types_h */
