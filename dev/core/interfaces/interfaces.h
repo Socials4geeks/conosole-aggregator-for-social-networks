@@ -10,10 +10,13 @@ public:
     Interface();
     ~Interface();
 
+    const std::string name_of_social_network;
+    
     int PrintHello();
     virtual int PrintMessages( Response data ) = 0;
     virtual int PrintWall( Response data ) = 0;
     virtual int PrintFriends( Response data ) = 0;
+
 
     virtual Request Input() = 0;
 };

@@ -11,7 +11,7 @@
 
 
 
-class InterfaceVK : public Interface {
+class InterfaceVK : public InterfaceTypical {
 public:
     InterfaceVK();
     ~InterfaceVK();

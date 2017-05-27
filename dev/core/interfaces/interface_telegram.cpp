@@ -1,24 +1,9 @@
 #include "core/interfaces/interface_telegram.h"
 
 InterfaceTelegram::InterfaceTelegram(){
-
+    name_of_social_network = "telegram";
 };
 
 InterfaceTelegram::~InterfaceTelegram(){
 
-};
-
-int InterfaceTelegram::PrintMessages( Response data ){
-    //TODO
-    return 0;
-};
-
-int InterfaceTelegram::PrintWall( Response data ){
-    //TODO
-    return 0;
-};
-
-int InterfaceTelegram::PrintFriends( Response data ){
-    //TODO
-    return 0;
 };

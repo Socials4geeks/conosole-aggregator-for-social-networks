@@ -5,7 +5,7 @@
 
 
 InterfaceTypical::InterfaceTypical() {
-
+    name_of_social_network = "typical social network";
 }
 
 
@@ -14,12 +14,10 @@ InterfaceTypical::~InterfaceTypical() {
 }
 
 int InterfaceTypical::PrintWall( Response data ) {
-
+    std::cout << termcolor::on_red << "Access violation:"
+          << termcolor::reset << " Please, login. Print 'help' for help." << std::endl;
 }
 
-int InterfaceTypical::PrintFriends( Response data ) {
-
-}
 
 int InterfaceTypical::PrintMessages( Response data ) {
     if (data.Type == typeOfResponse.ERROR) {
@@ -27,41 +25,42 @@ int InterfaceTypical::PrintMessages( Response data ) {
         std::cout << termcolor::red << reason << termcolor::reset << " Type 'help' for help" << std::endl;
 
     }
-    for (int i = 0 ; i < data.size(); i++) {
-        std::cout << termcolor::reset << "[" << data[i].at("datetime") << "] "
-                  << termcolor::colorizeStringByHash(data[i].at("username")) << termcolor::reset << ": ";
-        if (data[i].at("title") != "") {
-            std::cout << termcolor::bold << data[i].at("title") << termcolor::reset << std::endl;
+    for (int i = 0 ; i < data.Params.size(); i++) {
+        std::cout << termcolor::reset << "[" << data.Params[i]["datetime"] << "] "
+                  << termcolor::colorizeStringByHash(data.Params[i]["username"]) << termcolor::reset << ": ";
+        if (data.Params[i]["title"] != "") {
+            std::cout << termcolor::bold << data[i].Params["title"] << termcolor::reset << std::endl;
         }
-        std::cout << data[i].at("body") << std::endl;
+        std::cout << data[i].Params["body"] << std::endl;
     }
     return 0;
 };
 
 
-int InterfaceTypical::PrintWall( Response data ){
+int InterfaceTypical::PrintWall( Response data ) {
     std::cout << termcolor::on_red << "Access violation:"
               << termcolor::reset << " Unavailable in current version." << std::endl;
     return 0;
 };
 
 
-// int InterfaceTypical::PrintFriends( Response data ){
-//     std::sort(data.begin(), data.end(), 
-//               [](const FriendEntry & a, const FriendEntry & b) -> bool { 
-//                   return (a.isOnline > b.isOnline);
-//               });
+int InterfaceTypical::PrintFriends( Response data ) {
+    std::sort(data.Params.begin(), data.Params.end(), 
+              [](param & a, param & b) -> bool { 
+                  return (a["is_online"] > b["is_online"]);
+              });
 
-//     for (int i = 0; i < data.size(); i++) {
-//         if (data[i].isOnline) {
-//             std::cout << termcolor::green << data[i].username << termcolor::reset << ": online" << std::endl;
-//         } else {
-//             std::cout << termcolor::red << data[i].username << termcolor::reset << ": " << data[i].lastEnter << std::endl;
-//         }
-//     }
+    for (int i = 0; i < data.Params.size(); i++) {
+        if (data[i].Params["isOnline"]) {
+            std::cout << termcolor::green << data[i].Params["username"] << termcolor::reset << ": online" << std::endl;
+        } else {
+            std::cout << termcolor::red << data[i].Params["username"] << termcolor::reset
+                      << ": " << data[i].Params["last_enter"] << std::endl;
+        }
+    }
 
-//     return 0;
-// };
+    return 0;
+};
 
 
 template<typename Out>
@@ -82,7 +81,7 @@ std::vector<std::string> split(const std::string &s, char delim) {
 }
 
 
-std::vector<std::string> split_to_tokens(std::string command){
+std::vector<std::string> split_to_tokens(std::string command) {
     std::vector<std::string> qargs;
     int len = command.length();
     bool qot = false, sqot = false;
