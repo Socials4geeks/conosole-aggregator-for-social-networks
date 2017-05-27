@@ -5,11 +5,6 @@
 #include <vector>
 #include <string>
 
-typedef std::pair<std::string, std::string> LoginPassword;
-typedef std::pair<std::string, LoginPassword> AuthInfo; // First string is social network's name
-//TODO Replace string to bin
-typedef std::map<std::string, std::string> Settings;
-
 /**
     @class Session
     Содержит в себе всю информацию о пользователе, включая настройки,
@@ -20,12 +15,14 @@ class Session {
 public:
     Session();
     Session( std::string login );
-    Session( std::string login, Settings settings ) 
+    Session( std::string login, Settings settings );
+    authInfo GetAuthForApi( std::string nameOfRemoteAccount ); //Take id of SN. For example, "vk1"
 
 private:
     std::string localLogin;
-    std::vector<AuthInfo> authsForSocialNetworks;
-    Settings user_settings;
+    std::map< std::string, authInfo > authsForSocialNetworks;
+    params user_settings;
+    bool EmptySession;
 };
 
 #endif /*session_h*/
