@@ -1,5 +1,5 @@
-#ifndef interface_vk_h
-#define interface_vk_h
+#ifndef interface_Typical_h
+#define interface_Typical_h
 
 #include <iostream>
 #include "termcolor.h"
@@ -8,19 +8,19 @@
 #include <vector>
 #include <algorithm>
 #include <sstream>
+#include <map>
 
 
-class InterfaceVK : public InterfaceTypical {
+class InterfaceTypical : public Interface {
 public:
-    InterfaceVK();
-    ~InterfaceVK();
+    InterfaceTypical();
+    ~InterfaceTypical();
 
     int PrintMessages( Response data );
     int PrintWall( Response data );
     int PrintFriends( Response data );
-    int PrintError( Response data );
 
-    virtual Request Input();
+    Request Input();
 };
 
-#endif /* interface_vk_h */
+#endif /* interface_Typical_h */

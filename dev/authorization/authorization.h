@@ -9,6 +9,7 @@ public:
     Authorizator(std::vector< authInfo > UsersFromStorage );
     ~Authorizator();
 
+    virtual void Signup( std::string username, std::string password ) = 0;
     virtual Session Login( std::string username, std::string password ) = 0;
     virtual int Logout( Session session ) = 0;
 

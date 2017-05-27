@@ -1,12 +1,18 @@
 #ifndef types_h
 #define types_h
 
+#include <map>
+#include <vector>
+
 typedef std::pair< std::string, std::string > authInfo;
 
 typedef std::map< std::string, std::string > params;
 
 typedef enum {
     UNKNOWN,
+    NEW_LOCAL_ACCOUNT,
+    LOGIN_LOCAL_ACCOUNT,
+    LOGOUT_LOCAL_ACCOUNT,
     SHOW_MESSAGES,
     SHOW_WALL,
     SHOW_FRIENDS,
