@@ -1,5 +1,22 @@
 # Консольное приложение аггрегатор и администратор социальных сетей и мессенджеров для хардкорных админов
 
+*Поддерживаемые платформы:*
+
++ MacOS >= 10
++ Ubuntu >= 12.04
+
+*Сборка проекта:*
+
+1. git clone https://github.com/Socials4geeks/conosole-aggregator-for-social-networks console_application
+2. cd console_application
+3. sudo ./configure
+4. ???
+5. make
+6. make clear
+7. Profit!
+
+-------------------------
+
 *Структура проекта:*
 
 + Makefile - Файл для сборки проекта

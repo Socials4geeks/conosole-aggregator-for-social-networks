@@ -12,5 +12,5 @@ all: ${OBJS}
 	${CPP} ${INCLUDES} -c $*.cpp
 
 clear:
-	rm -rf bin/*
+	rm -f bin/${OUT}
 	rm -rf *.o
