@@ -26,9 +26,9 @@ else
     exit 1
 fi
 
-if #git clone https://github.com/Microsoft/cpprestsdk.git casablanca &&
+if git clone https://github.com/Microsoft/cpprestsdk.git casablanca &&
    cd casablanca/Release &&
-   #mkdir temp.casablanca.build.release &&
+   mkdir temp.casablanca.build.release &&
    cd temp.casablanca.build.release &&
    CXX=g++ CMAKE_CXX_COMPILER=g++ cmake .. -DCMAKE_BUILD_TYPE=Release &&
    make -j 4 &&
@@ -37,8 +37,8 @@ if #git clone https://github.com/Microsoft/cpprestsdk.git casablanca &&
    cd .. &&
    make install &&
    cd ../../.. &&
-   for h in find -regex '.*\.\(h\|hpp\)'
-       do mv $h include/
+   for h in $(find . -regex '.*\.\(h\|hpp\)')
+       do cp -f $h include/
    done
 then
    echo DONE project is success configurated!
