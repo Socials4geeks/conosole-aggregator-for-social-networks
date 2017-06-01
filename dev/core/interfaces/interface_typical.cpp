@@ -4,7 +4,7 @@
 #include <stdexcept>
 
 
-InterfaceTypical::InterfaceTypical(): name_of_social_network("") {}
+InterfaceTypical::InterfaceTypical(): {}
 
 
 InterfaceTypical::~InterfaceTypical() {
