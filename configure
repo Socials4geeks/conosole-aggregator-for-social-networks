@@ -16,7 +16,7 @@ then
     fi
 elif [ $OS == 'Darwin' ]
 then
-    if ! xargs brew install < requirements_Darvin.txt
+    if ! xargs brew install < requirements_Darwin.txt
     then
        echo ERROR occured when configuration the project!
        exit 1
@@ -26,11 +26,11 @@ else
     exit 1
 fi
 
-if git clone https://github.com/Microsoft/cpprestsdk.git casablanca &&
+if #git clone https://github.com/Microsoft/cpprestsdk.git casablanca &&
    cd casablanca/Release &&
-   mkdir temp.casablanca.build.release &&
+   #mkdir temp.casablanca.build.release &&
    cd temp.casablanca.build.release &&
-   CXX=g++-4.8 cmake .. -DCMAKE_BUILD_TYPE=Release &&
+   CXX=g++ CMAKE_CXX_COMPILER=g++ cmake .. -DCMAKE_BUILD_TYPE=Release &&
    make -j 4 &&
    cd Binaries
    ./test_runner *_test.so &&

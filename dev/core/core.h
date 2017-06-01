@@ -1,7 +1,8 @@
 #ifndef core_h
 #define core_h
 
-#include interface.h
+#include "authorization.h"
+#include "types.h"
 
 class Core{
 public:
