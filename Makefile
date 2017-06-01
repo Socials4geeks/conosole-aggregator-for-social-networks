@@ -9,7 +9,7 @@ all: ${OBJS}
 	${CPP} ${OPTIONS} ${OBJS} ${OUT} ${LIBDIR} ${LIBS}
 
 %.o: %.cpp
-	${CPP} ${INCLUDES} -c $*.cpp ${INCLUDES}
+	${CPP} ${INCLUDES} -c $*.cpp
 
 clear:
 	rm -rf bin/*

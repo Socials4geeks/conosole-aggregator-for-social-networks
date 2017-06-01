@@ -1,4 +1,5 @@
-#include "core/interfaces/interfaces.h"
+#include "interfaces.h"
+#include "types.h"
 
 Interface::Interface() {
     //TODO
@@ -8,6 +9,6 @@ Interface::~Interface() {
     //TODO
 };
 
-int Interface::PrintHello() {
+Status Interface::PrintHello() {
     //TODO
 };

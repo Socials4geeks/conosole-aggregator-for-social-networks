@@ -8,7 +8,8 @@
 
 class Storage;
 class Handler;
-struct Serializator;
+template <class T>
+struct Serializer;
 
 /**
     @class Storage
@@ -20,11 +21,10 @@ class Storage {
   protected:
     void* buffer;  /// Промежуточный буфер
     size_t buffer_size;  /// Размер буфера
-    std::vector<Hanler> handlers;
+    std::vector<Handler> handlers;
 
   public:
-    Storage() : buffer(nullptr), buffer_size(0),
-                serialisator(nullptr) {};
+    Storage();
     Storage( Storage& storage );
     Storage( Storage&& storage );
     /// Аллоцирующий конструктор, выделяющий сразу size байт под данные
@@ -32,10 +32,9 @@ class Storage {
     /// Конструктор, заполняющий буфер данными
     Storage( void* data, size_t bytes );
     /// Сохраняет bytes байтов данных data и возвращет handle
-    virtual int Set( std::string key, void* data, size_t bytes ) = 0;
+    virtual Status Set( std::string key, void* data, size_t bytes ) = 0;
     /// Возвращает указатель на загруженный объект данных
-    virtual int Get( std::string key, void*& data, size_t& bytes ) = 0;
-    ~Storage();
+    virtual Status Get( std::string key, void*& data, size_t& bytes ) = 0;
 };
 
 /**
@@ -47,7 +46,6 @@ class Storage {
 
 class Handler {
   public:
-    void Handler() {};
     /// Открыть объект хранилища
     virtual void open() = 0;
     /// Закрыть объект хранилища
@@ -66,11 +64,11 @@ class Handler {
 **/
 
 template <class T>
-struct Serialisator {
-    void* encode( T data );
+struct Serializer {
+    void* encode( T& data );
     T decode( void* data );
 };
 
-#include "storage/serialisator.hpp"
+#include "serializer.hpp"
 
 #endif  // BASE_STORAGE_H

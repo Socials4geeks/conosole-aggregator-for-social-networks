@@ -2,25 +2,31 @@
 #define interface_Typical_h
 
 #include <iostream>
-#include "termcolor.h"
-#include "types.h"
-#include "core/interfaces.h"
 #include <vector>
 #include <algorithm>
 #include <sstream>
 #include <map>
 
+#include "termcolor.h"
+#include "types.h"
+#include "interfaces.h"
 
 class InterfaceTypical : public Interface {
 public:
     InterfaceTypical();
     ~InterfaceTypical();
 
-    int PrintMessages( Response data );
-    int PrintWall( Response data );
-    int PrintFriends( Response data );
-
+    virtual Status PrintMessages( Response data );
+    virtual Status PrintWall( Response data );
+    virtual Status PrintFriends( Response data );
     Request Input();
+
+private:
+    template<typename Out>
+    void split(const std::string &s, char delim, Out result);
+    std::vector<std::string> split(const std::string &s, char delim);
+    std::vector<std::string> split_to_tokens(std::string command);
+    params split_to_kwargs(std::vector<std::string>& args);
 };
 
 #endif /* interface_Typical_h */

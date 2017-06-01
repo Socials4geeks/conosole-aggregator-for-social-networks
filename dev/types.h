@@ -8,7 +8,7 @@
 
 typedef std::pair< std::wstring, std::wstring > authInfo;
 
-typedef std::map< std::wstring, std::wstring > params;
+typedef std::map< std::string, std::wstring > params;
 
 enum TypeOfAction{
     UNKNOWN,

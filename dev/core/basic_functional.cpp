@@ -1,1 +1,7 @@
-#include "core/basic_functional.h"
+#include "basic_functional.cpp"
+#include "types.h"
+#include "exceptions.h"
+
+Response BasicFunctions::Hello() {
+   throw NotImplementedYet();
+}

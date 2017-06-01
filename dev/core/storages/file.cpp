@@ -1,10 +1,16 @@
-#include "storages/file.h"
+#include "file.h"
 
 #include <string>
 #include <fstream>
 
 #include "types.h"
 // Методы File
+
+File() : Storage(), handler(nullptr) {};
+
+File( void* data, size_t size ) : Storage( data, size ), handler(nullptr) {};
+
+File( size_t size ) : Storage( size ), handler(nullptr) {};
 
 File::File( File& file )
 {
@@ -37,6 +43,10 @@ status File::Get( std::string key, void*& data, size_t& bytes )
 }
 
 // Методы FileHandler
+
+FileHandler( std::string name ) : Handler(), handler(nullptr), filename(name) {};
+
+FileHandler() : Handler(), handler(nullptr), filename("") {};
 
 void FileHandler::open()
 {
