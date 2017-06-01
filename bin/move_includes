@@ -1,0 +1,4 @@
+#!/bin/bash
+for h in $(find dev -name *.h*)
+    do cp -f $h include/
+done

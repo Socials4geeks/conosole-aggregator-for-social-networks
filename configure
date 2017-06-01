@@ -37,7 +37,7 @@ if git clone https://github.com/Microsoft/cpprestsdk.git casablanca &&
    cd .. &&
    make install &&
    cd ../../.. &&
-   for h in $(find . -regex '.*\.\(h\|hpp\)')
+   for h in $(find dev -regex '.*\.\(h\|hpp\)')
        do cp -f $h include/
    done
 then
