@@ -4,10 +4,11 @@
 
 #include "exceptions.h"
 
+Storage::Storage() : buffer(nullptr), buffer_size(0) {};
+
 Storage::Storage( Storage& storage ) {
     buffer_size = storage.buffer_size;
     buffer = new void[buffer_size];
-    serializer = storage.serializer;
 }
 
 Storage::Storage( Storage&& storage ) {
@@ -16,9 +17,6 @@ Storage::Storage( Storage&& storage ) {
     buffer = new void[buffer_size];
     delete[] storage.buffer;
     memmove(buffer, storage.buffer, buffer_size);
-    serializer = new Serializer();
-    serializer = storage.serializer;
-    delete[] storage.serializer;
 }
 
 int Storage::Set( std::string key, void* data, size_t bytes ) {

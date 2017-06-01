@@ -2,23 +2,23 @@
 #define interface_Typical_h
 
 #include <iostream>
-#include "termcolor.h"
-#include "types.h"
-#include "core/interfaces.h"
 #include <vector>
 #include <algorithm>
 #include <sstream>
 #include <map>
 
+#include "termcolor.h"
+#include "types.h"
+#include "interfaces.h"
 
 class InterfaceTypical : public Interface {
 public:
     InterfaceTypical();
     ~InterfaceTypical();
 
-    int PrintMessages( Response data );
-    int PrintWall( Response data );
-    int PrintFriends( Response data );
+    virtual int PrintMessages( Response data );
+    virtual int PrintWall( Response data );
+    virtual int PrintFriends( Response data );
 
     Request Input();
 };

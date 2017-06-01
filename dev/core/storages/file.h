@@ -1,4 +1,4 @@
-#include "storages/storage.h"
+#include "storage.h"
 
 #include <string>
 #include <fstream>
@@ -9,23 +9,24 @@
     Хранилище на файловой системе
 **/
 
-const char root_dir[] = "/tmp/storages/"
+class FileHandler;
+
+const char root_dir[] = "/tmp/storages/";
 
 class File : public Storage {
   public:
-    File() : Storage(), handler(nullptr) {};
+    File();
     /// Аллоцирующий конструктор, выделяющий сразу size байт под данные
-    File( size_t size ) : Storage( size ), handler(nullptr) {};
+    File( size_t size );
     /// Конструктор, заполняющий буфер данными
-    File( void* data, size_t bytes ) : Storage( data, size ), handler(nullptr) {};
+    File( void* data, size_t bytes );
     /// Принимает объект-сериализатор, который отвечает за представление данных в памяти
-    File( Serialisator* serialisator ) : Storage( serialisator ), handler(nullptr) {};
     File( File& file );
     File( File&& file );
     /// Сохраняет bytes байтов данных data по ключу key
-    virtual status Set( std::string key, void* data, size_t bytes );
+    virtual Status Set( std::string key, void* data, size_t bytes );
     /// Возвращает указатель на загруженный объект данных по ключу key
-    virtual status Get( std::string key, void*& data, size_t bytes );
+    virtual Status Get( std::string key, void*& data, size_t& bytes );
   private:
     FileHandler* handler;
 };
@@ -37,9 +38,9 @@ class File : public Storage {
 
 class FileHandler : Handler {
   public:
-    void FileHandler() : Handler(), handler(nullptr), filename("") {};
+    FileHandler();
     /// Конструктор, инициализирующий название файла
-    void FileHandler( std::string name ) : Handler(), handler(nullptr), filename(name) {};
+    FileHandler( std::string name );
     void set_filename( std::string name );
     std::string get_filename();
     /// Открыть объект хранилища
@@ -47,10 +48,10 @@ class FileHandler : Handler {
     /// Закрыть объект хранилища
     virtual void close();
     /// Открыт ли объект хранилища
-    virtual void is_open();
+    virtual bool is_open();
     virtual void write(void* data, size_t size);
     virtual void read(void*& data, size_t& size);
   protected:
-    fstream file;
+    std::fstream file;
     std::string filename;
 };

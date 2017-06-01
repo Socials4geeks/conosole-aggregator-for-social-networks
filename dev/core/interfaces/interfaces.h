@@ -17,7 +17,6 @@ public:
     virtual int PrintWall( Response data ) = 0;
     virtual int PrintFriends( Response data ) = 0;
 
-
     virtual Request Input() = 0;
 };
 

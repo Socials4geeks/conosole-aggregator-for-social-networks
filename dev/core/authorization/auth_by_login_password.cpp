@@ -1,6 +1,9 @@
+#include <vector>
 
+#include "auth_by_login_password.h"
+#include "types.h"
 
-AuthorizatorByLoginPassword::AuthorizatorByLoginPassword() {};
+AuthorizatorByLoginPassword::AuthorizatorByLoginPassword( std::vector< authInfo > existingUsers ) {};
 
 AuthorizatorByLoginPassword::~AuthorizatorByLoginPassword() {};
 

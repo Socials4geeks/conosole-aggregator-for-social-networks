@@ -12,10 +12,10 @@ public:
     InterfaceBasic();
     ~InterfaceBasic();
 
-    int PrintMessages( Response data );
-    int PrintFriends( Response data );
-    int PrintWall( Response data );
-    int PrintURl( Response data);
+    virtual int PrintMessages( Response data );
+    virtual int PrintFriends( Response data );
+    virtual int PrintWall( Response data );
+    virtual int PrintURl( Response data);
 
     Request Input();
 };

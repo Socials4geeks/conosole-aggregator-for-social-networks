@@ -1,16 +1,14 @@
+#include <stdexcept>
+
 #include "core/interfaces/interface_typical.h"
 #include "types.h"
 #include "core/interfaces/interfaces.h"
-#include <stdexcept>
-
 
 InterfaceTypical::InterfaceTypical(): name_of_social_network("") {}
-
 
 InterfaceTypical::~InterfaceTypical() {
 
 }
-
 
 int InterfaceTypical::PrintMessages( Response data ) {
     if (data.Type == typeOfResponse.ERROR) {
@@ -29,13 +27,11 @@ int InterfaceTypical::PrintMessages( Response data ) {
     return 0;
 };
 
-
 int InterfaceTypical::PrintWall( Response data ) {
     std::cout << termcolor::on_red << "Access violation:"
               << termcolor::reset << " Unavailable in current version." << std::endl;
     return 0;
 };
-
 
 int InterfaceTypical::PrintFriends( Response data ) {
     std::sort(data.Params.begin(), data.Params.end(), 
@@ -55,7 +51,6 @@ int InterfaceTypical::PrintFriends( Response data ) {
     return 0;
 };
 
-
 template<typename Out>
 void split(const std::string &s, char delim, Out result) {
     std::stringstream ss;
@@ -66,13 +61,11 @@ void split(const std::string &s, char delim, Out result) {
     }
 }
 
-
 std::vector<std::string> split(const std::string &s, char delim) {
     std::vector<std::string> elems;
     split(s, delim, std::back_inserter(elems));
     return elems;
 }
-
 
 std::vector<std::string> split_to_tokens(std::string command) {
     std::vector<std::string> qargs;
@@ -116,7 +109,6 @@ std::vector<std::string> split_to_tokens(std::string command) {
     return qargs;
 }
 
-
 params split_to_kwargs(std::vector<std::string>& args) {
     std::map<std::string, std::string> kwargs;
     for (int i = 0; i < args.size(); i++) {
@@ -130,7 +122,6 @@ params split_to_kwargs(std::vector<std::string>& args) {
     }
     return kwargs;
 }
-
 
 Request InterfaceTypical::Input() {
     std::string line;

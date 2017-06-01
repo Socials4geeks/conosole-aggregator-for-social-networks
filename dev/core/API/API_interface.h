@@ -4,30 +4,24 @@
 #include <map>
 #include <string>
 
-#include "core/API/APIs.h"
+#include "APIs.h"
 
 class APIInterface {
 public:
-    APIInterface();
-
-protected:
-    virtual status SendMessage( authInfo loginPassword,  std::string topic, std::string text, std::string recipient, response& Response );  // TODO: recipients => recipients
+    virtual Status SendMessage( authInfo loginPassword,  std::wstring topic, std::wstring text, std::wstring recipient, Response& response ) = 0;  // TODO: recipients => recipients
     /// Показывает n последних сообщений от пользователя user
-    virtual status ShowMessages( authInfo loginPassword, response& Response );
-    virtual status AddFriend(authInfo loginPassword, std::string idOfFriend, response& Response );
-    virtual status GetFriends(authInfo loginPassword, response& Response );
-    virtual status RemoveFriend(authInfo loginPassword, std::string idOfFriend, response& Response );
-    virtual status GetWall( authInfo loginPassword, response& Response );
-    virtual status AddWall( authInfo loginPassword, std::string text  );  // TODO: Replace std::string text to special struct for each SN
+    virtual Status ShowMessages( authInfo loginPassword, Response& response ) = 0;  // TODO: Show -> Get
+    virtual Status AddFriend(authInfo loginPassword, std::wstring idOfFriend, Response& response ) = 0;
+    virtual Status GetFriends(authInfo loginPassword, Response& response ) = 0;
+    virtual Status RemoveFriend(authInfo loginPassword, std::wstring idOfFriend, Response& response ) = 0;
+    virtual Status GetWall( authInfo loginPassword, Response& response ) = 0;
+    virtual Status AddWall( authInfo loginPassword, std::wstring text, Response& response ) = 0;  // TODO: Replace std::wstring text to special struct for each SN
 
 protected:
-    API api;
+    API* api;
 
-private:
-    void login_if_not_logined( authInfo loginPassword );
-    status checkCorrectLoginPassword( authInfo loginPassword, response& Response, int& uid );
+    virtual void login_if_not_logined( authInfo loginPassword ) = 0;
+    virtual Status checkCorrectLoginPassword( authInfo loginPassword, Response& response, int& uid ) = 0;
 };
 
-
 #endif /* API_Interface_h */
-
