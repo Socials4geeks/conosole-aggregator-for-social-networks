@@ -4,7 +4,7 @@
 #include "types.h"
 #include "core/interfaces/interfaces.h"
 
-InterfaceTypical::InterfaceTypical(): name_of_social_network("") {}
+InterfaceTypical::InterfaceTypical(): {}
 
 InterfaceTypical::~InterfaceTypical() {
 
