@@ -10,7 +10,7 @@ InterfaceTypical::~InterfaceTypical() {
 
 }
 
-int InterfaceTypical::PrintMessages( Response data ) {
+Status InterfaceTypical::PrintMessages( Response data ) {
     if (data.Type == typeOfResponse.ERROR) {
         std::string reason = data.Params[0].at("reason");
         std::cout << termcolor::red << reason << termcolor::reset << std::endl;
@@ -27,13 +27,13 @@ int InterfaceTypical::PrintMessages( Response data ) {
     return 0;
 };
 
-int InterfaceTypical::PrintWall( Response data ) {
+Status InterfaceTypical::PrintWall( Response data ) {
     std::cout << termcolor::on_red << "Access violation:"
               << termcolor::reset << " Unavailable in current version." << std::endl;
     return 0;
 };
 
-int InterfaceTypical::PrintFriends( Response data ) {
+Status InterfaceTypical::PrintFriends( Response data ) {
     std::sort(data.Params.begin(), data.Params.end(), 
               [](param & a, param & b) -> bool { 
                   return (a["is_online"] > b["is_online"]);
@@ -52,7 +52,7 @@ int InterfaceTypical::PrintFriends( Response data ) {
 };
 
 template<typename Out>
-void split(const std::string &s, char delim, Out result) {
+void InterfaceTypical::split(const std::string &s, char delim, Out result) {
     std::stringstream ss;
     ss.str(s);
     std::string item;
@@ -61,13 +61,13 @@ void split(const std::string &s, char delim, Out result) {
     }
 }
 
-std::vector<std::string> split(const std::string &s, char delim) {
+std::vector<std::string> InterfaceTypical::split(const std::string &s, char delim) {
     std::vector<std::string> elems;
     split(s, delim, std::back_inserter(elems));
     return elems;
 }
 
-std::vector<std::string> split_to_tokens(std::string command) {
+std::vector<std::string> InterfaceTypical::split_to_tokens(std::string command) {
     std::vector<std::string> qargs;
     int len = command.length();
     bool qot = false, sqot = false;
@@ -109,7 +109,7 @@ std::vector<std::string> split_to_tokens(std::string command) {
     return qargs;
 }
 
-params split_to_kwargs(std::vector<std::string>& args) {
+params InterfaceTypical::split_to_kwargs(std::vector<std::string>& args) {
     std::map<std::string, std::string> kwargs;
     for (int i = 0; i < args.size(); i++) {
         if (args[i][0] == '-') {

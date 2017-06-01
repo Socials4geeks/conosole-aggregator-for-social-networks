@@ -16,11 +16,16 @@ public:
     InterfaceTypical();
     ~InterfaceTypical();
 
-    virtual int PrintMessages( Response data );
-    virtual int PrintWall( Response data );
-    virtual int PrintFriends( Response data );
-
+    virtual Status PrintMessages( Response data );
+    virtual Status PrintWall( Response data );
+    virtual Status PrintFriends( Response data );
     Request Input();
+
+private:
+    void split(const std::string &s, char delim, Out result);
+    std::vector<std::string> split(const std::string &s, char delim);
+    std::vector<std::string> split_to_tokens(std::string command);
+    params split_to_kwargs(std::vector<std::string>& args);
 };
 
 #endif /* interface_Typical_h */

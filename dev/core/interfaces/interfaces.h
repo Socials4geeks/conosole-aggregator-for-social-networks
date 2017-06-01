@@ -12,10 +12,10 @@ public:
 
     std::string name_of_social_network;
     
-    int PrintHello();
-    virtual int PrintMessages( Response data ) = 0;
-    virtual int PrintWall( Response data ) = 0;
-    virtual int PrintFriends( Response data ) = 0;
+    Status PrintHello();
+    virtual Status PrintMessages( Response data ) = 0;
+    virtual Status PrintWall( Response data ) = 0;
+    virtual Status PrintFriends( Response data ) = 0;
 
     virtual Request Input() = 0;
 };
