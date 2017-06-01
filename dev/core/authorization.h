@@ -1,1 +1,1 @@
-#include "core/autorisation/auth_vk.h"
+#include "core/autorization/auth_vk.h"
