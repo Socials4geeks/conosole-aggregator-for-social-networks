@@ -2,36 +2,47 @@
 
 #NOTE: Чтобы собрать дебаг-версию, нужно просто заменить все reliase на debug
 
-UBUNTU_VERSION=$(lsb_release -r | awk '{ print $2 }')
-if [ $(echo "$UBUNTU_VERSION < 14.04" | bc) = 1 ]
+OS=$(uname -sr | awk '{ print $1 }')
+if [ $OS == 'Linux' ]
 then
-   echo SORRY, your version of Ubuntu is not supported, please, upgrade your operation system
-   exit 1
+    if ! apt-get install software-properties-common &&
+       add-apt-repository ppa:george-edison55/cmake-3.x &&
+       apt-get update &&
+       xargs apt-get -y install < requirements_Linux.txt &&
+       apt-get upgrade
+    then
+       echo ERROR occured when configuration the project!
+       exit 1
+    fi
+elif [ $OS == 'Darwin' ]
+then
+    if ! xargs brew install < requirements_Darwin.txt
+    then
+       echo ERROR occured when configuration the project!
+       exit 1
+    fi
 else
-   if apt-get install software-properties-common &&
-      add-apt-repository ppa:george-edison55/cmake-3.x &&
-      apt-get update &&
-      xargs apt-get -y install < requirements.txt &&
-      apt-get upgrade &&
-      git clone https://github.com/Microsoft/cpprestsdk.git casablanca &&
-      cd casablanca/Release &&
-      mkdir temp.casablanca.build.release &&
-      cd temp.casablanca.build.release &&
-      CXX=g++-4.8 cmake .. -DCMAKE_BUILD_TYPE=Release &&
-      make &&
-      cd Binaries
-      ./test_runner *_test.so &&
-      cd .. &&
-      make install &&
-      cd ../../.. &&
-      rm -rf casablanca &&
-      for h in find -regex '.*\.\(h\|hpp\)'
-          do mv $h include/
-      done
-   then
-      echo DONE project is success configurated!
-   else
-      echo ERROR occured when configuration the project!
-      exit 1
-   fi
+    echo "ERROR: Your operation system is not supported yet :("
+    exit 1
+fi
+
+if git clone https://github.com/Microsoft/cpprestsdk.git casablanca &&
+   cd casablanca/Release &&
+   mkdir temp.casablanca.build.release &&
+   cd temp.casablanca.build.release &&
+   CXX=g++ CMAKE_CXX_COMPILER=g++ cmake .. -DCMAKE_BUILD_TYPE=Release &&
+   make -j 4 &&
+   cd Binaries
+   ./test_runner *_test.so &&
+   cd .. &&
+   make install &&
+   cd ../../.. &&
+   for h in $(find . -regex '.*\.\(h\|hpp\)')
+       do cp -f $h include/
+   done
+then
+   echo DONE project is success configurated!
+else
+   echo ERROR occured when configuration the project!
+   exit 1
 fi

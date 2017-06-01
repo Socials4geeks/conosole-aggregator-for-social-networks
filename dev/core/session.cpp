@@ -9,7 +9,7 @@ Session::Session( std::string login ) :
     localLogin( login ),
     EmptySession( false ) {};
 
-Session::Session( std::string login, Settings settings ) : 
+Session::Session( std::string login, params settings ) : 
     localLogin( login ),
     EmptySession( false ),
     user_settings( settings ) {};

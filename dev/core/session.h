@@ -18,7 +18,7 @@ class Session {
 public:
     Session();
     Session( std::string login );
-    Session( std::string login, Settings settings );
+    Session( std::string login, params settings );
     authInfo GetAuthForApi( std::string nameOfRemoteAccount ); //Take id of SN. For example, "vk1"
 
 private:

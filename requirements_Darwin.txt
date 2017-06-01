@@ -1,0 +1,6 @@
+git
+make
+boost
+openssl
+libiconv
+cmake

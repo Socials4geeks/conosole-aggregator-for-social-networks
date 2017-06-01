@@ -4,12 +4,13 @@
 #include <map>
 #include <vector>
 #include <ctime>
+#include <string>
 
 typedef std::pair< std::wstring, std::wstring > authInfo;
 
 typedef std::map< std::wstring, std::wstring > params;
 
-typedef enum {
+enum TypeOfAction{
     UNKNOWN,
     NEW_LOCAL_ACCOUNT,
     LOGIN_LOCAL_ACCOUNT,
@@ -21,39 +22,45 @@ typedef enum {
     ADD_WALL,
     ADD_FRIEND,
     REMOVE_FRIEND
-} TypeOfAction;
+};
 
-typedef enum {
+enum TypeOfResponse{
     MESSAGES,
     WALL,
     FRIENDS,
     LOGIN_STATUS,
     ACCEPT,
     ERROR,
-} TypeOfResponse; 
+}; 
 
-typedef struct Request {
+struct Request {
     std::string IdOfRemoteAccount;
     TypeOfAction Action;
     params Params;
-    Request() {
-        Action = TypeOfAction::UNKNOWN;
-    }
-} Request;
 
-typedef struct {
+    Request();
+};
+
+Request::Request() {
+    Action = UNKNOWN;
+}
+
+struct Response{
     std::string IdOfRemoteAccount;
     TypeOfResponse Type;
     std::vector< params > Params;
-    Request() {
-        Type = typeOfResponse::ERROR;
-    }
-} Response;
 
-typedef enum {
+    Response();
+};
+
+Response::Response() {
+    Type = ERROR;
+}
+
+enum Status{
     OK,
-    ERROR
-} Status;
+    UNKNOWN_ERROR
+};
 
 
 /// API data structures
@@ -62,11 +69,11 @@ typedef std::pair<time_t, std::wstring> TokenInfo;
 
 typedef std::vector< std::pair<std::wstring, std::wstring> > UrlParams;
 
-typedef enum {
+enum Sex{
     NOT_DEFINED,
     WOMEN,
     MEN
-} Sex;
+};
 
 struct ProfileInfo {
     int uid;
@@ -95,10 +102,10 @@ struct Message {
 
 class NotImplementedYet : public std::exception {};
 
-struct TemporaryBrowserAuthorisation : public std::exception {
-    TemporaryBrowserAuthorisation( TokenInfo& access_token ) : access_token(access_token);
+struct TemporaryBrowserAuthorization : public std::exception {
+    TemporaryBrowserAuthorization( TokenInfo& access_token ) : access_token(access_token) {};
     TokenInfo& access_token;
-    std::stirng authorisation_url;
+    std::string authorization_url;
 };
 
 #endif /* types_h */
