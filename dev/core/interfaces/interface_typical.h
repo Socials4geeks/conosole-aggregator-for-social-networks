@@ -22,6 +22,7 @@ public:
     Request Input();
 
 private:
+    template<typename Out>
     void split(const std::string &s, char delim, Out result);
     std::vector<std::string> split(const std::string &s, char delim);
     std::vector<std::string> split_to_tokens(std::string command);
