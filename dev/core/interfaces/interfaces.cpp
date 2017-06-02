@@ -1,5 +1,5 @@
-#include "interfaces.h"
-#include "types.h"
+#include "core/interfaces/interfaces.h"
+#include "core/interfaces/types.h"
 
 Interface::Interface() {
     //TODO

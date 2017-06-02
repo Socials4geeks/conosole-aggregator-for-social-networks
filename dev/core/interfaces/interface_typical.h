@@ -7,9 +7,9 @@
 #include <sstream>
 #include <map>
 
-#include "termcolor.h"
+#include "core/interfaces/termcolor.h"
 #include "types.h"
-#include "interfaces.h"
+#include "core/interfaces/interfaces.h"
 
 class InterfaceTypical : public Interface {
 public:

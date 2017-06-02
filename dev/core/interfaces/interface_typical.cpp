@@ -10,7 +10,7 @@ InterfaceTypical::~InterfaceTypical() {
 
 }
 
-Status InterfaceTypical::PrintMessages( Response data ) {
+virtual Status InterfaceTypical::PrintMessages( Response data ) {
     if (data.Type == typeOfResponse.ERROR) {
         std::string reason = data.Params[0].at("reason");
         std::cout << termcolor::red << reason << termcolor::reset << std::endl;
@@ -27,13 +27,13 @@ Status InterfaceTypical::PrintMessages( Response data ) {
     return 0;
 };
 
-Status InterfaceTypical::PrintWall( Response data ) {
+virtual Status InterfaceTypical::PrintWall( Response data ) {
     std::cout << termcolor::on_red << "Access violation:"
               << termcolor::reset << " Unavailable in current version." << std::endl;
     return 0;
 };
 
-Status InterfaceTypical::PrintFriends( Response data ) {
+virtual Status InterfaceTypical::PrintFriends( Response data ) {
     std::sort(data.Params.begin(), data.Params.end(), 
               [](param & a, param & b) -> bool { 
                   return (a["is_online"] > b["is_online"]);
@@ -123,7 +123,7 @@ params InterfaceTypical::split_to_kwargs(std::vector<std::string>& args) {
     return kwargs;
 }
 
-Request InterfaceTypical::Input() {
+virtual Request InterfaceTypical::Input() {
     std::string line;
     std::string account, command;
     Request request;
