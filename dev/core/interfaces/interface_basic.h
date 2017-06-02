@@ -2,9 +2,9 @@
 #define interface_basic_h
 
 #include <iostream>
-#include "termcolor.h"
+#include "core/interfaces/termcolor.h"
 #include "types.h"
-#include "interfaces.h"
+#include "core/interfaces/interfaces.h"
 #include <vector>
 
 class InterfaceBasic : public Interface {

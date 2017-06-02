@@ -1,7 +1,7 @@
-#include "interface_vk.h"
+#include "core/interfaces/interface_vk.h"
 #include "types.h"
-#include "interfaces.h"
-#include "termcolor.h"
+#include "core/interfaces/interfaces.h"
+#include "core/interfaces/termcolor.h"
 
 InterfaceVK::InterfaceVK() {
     name_of_social_network = "vk";

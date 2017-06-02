@@ -4,8 +4,8 @@
 #include <iostream>
 #include <vector>
 
-#include "termcolor.h"
-#include "interfaces.h"
+#include "core/interfaces/termcolor.h"
+#include "core/interfaces/interfaces.h"
 
 class InterfaceTelegram : public InterfaceTypical {
 public:
