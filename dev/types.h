@@ -10,7 +10,7 @@ typedef std::pair< std::wstring, std::wstring > authInfo;
 
 typedef std::map< std::string, std::wstring > params;
 
-enum TypeOfAction{
+enum TypeOfAction {
     UNKNOWN,
     NEW_LOCAL_ACCOUNT,
     LOGIN_LOCAL_ACCOUNT,
@@ -24,7 +24,7 @@ enum TypeOfAction{
     REMOVE_FRIEND
 };
 
-enum TypeOfResponse{
+enum TypeOfResponse {
     MESSAGES,
     WALL,
     FRIENDS,
@@ -45,8 +45,8 @@ Request::Request() {
     Action = UNKNOWN;
 }
 
-struct Response{
-    std::string IdOfRemoteAccount;
+struct Response {
+    std::wstring IdOfRemoteAccount;
     TypeOfResponse Type;
     std::vector< params > Params;
 

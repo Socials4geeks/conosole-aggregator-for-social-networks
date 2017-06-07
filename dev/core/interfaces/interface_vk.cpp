@@ -12,7 +12,7 @@ InterfaceVK::~InterfaceVK() {
 };
 
 Status InterfaceVK::PrintError( Response data ) {
-    std::cout << termcolor::on_red << "Error:"
-              << termcolor::reset << " " << data.Params[0]["reason"] << std::endl;
+    std::wcout << termcolor::on_red << L"Error:"
+              << termcolor::reset << L" " << data.Params[0]["reason"] << std::endl;
     return OK;
 };

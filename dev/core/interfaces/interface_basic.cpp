@@ -1,4 +1,4 @@
-#include "interfaces/interface_basic.h"
+#include "interface_basic.h"
 
 InterfaceBasic::InterfaceBasic(){
 
@@ -15,20 +15,21 @@ void printLoginNecessity() {
 
 Status InterfaceBasic::PrintMessages( Response data ) {
     printLoginNecessity();
-    return 1;
+    return OK;
 };
 
 Status InterfaceBasic::PrintWall( Response data ) {
     printLoginNecessity();
-    return 1;
+    return OK;
 };
 
 Status InterfaceBasic::PrintFriends( Response data ) {
     printLoginNecessity();
-    return 1;
+    return OK;
 };
 
 Status InterfaceBasic::PrintURL( Response data ) {
-    std::cout << termcolor::green "To authenticate, plase go to link: "
+    std::wcout << termcolor::green << L"To authenticate, plase go to link: "
               << termcolor::reset << data.Params[0]["url"] << std::endl;
+    return OK;
 }
