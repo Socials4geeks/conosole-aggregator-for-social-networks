@@ -1,10 +1,10 @@
-#include "storage.h"
-#include "exceptions.h"
-
 #include <iostream>
 #include <string>
 #include <vector>
 #include <cstring>
+
+#include "storage.h"
+#include "exceptions.h"
 
 Storage::Storage() : buffer(nullptr), buffer_size(0) {};
 

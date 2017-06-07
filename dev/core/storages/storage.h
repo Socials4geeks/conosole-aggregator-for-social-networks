@@ -1,9 +1,9 @@
 #ifndef BASE_STORAGE_H
 #define BASE_STORAGE_H
 
-#include "types.h"
-
 #include <vector>
+
+#include "types.h"
 
 /** 
     @module storage
