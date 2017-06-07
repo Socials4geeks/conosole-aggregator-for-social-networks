@@ -1,6 +1,7 @@
-#ifndef exceptions_h
-#define exceptions_h
+#ifndef EXCEPTIONS_H
+#define EXCEPTIONS_H
 
-//TODO NotAuthorized, NotImplementedYet
+class NotImplemented : public std::exception {};
+class NotAuthorized: public std::exception {};
 
-#endif exceptions_h
+#endif  // EXCEPTIONS_H

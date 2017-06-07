@@ -1,27 +1,29 @@
 #include "core.h"
-#include "file.h"
+#include "storages.h"
 #include "types.h"
+#include "exceptions.h"
 #include "auth_by_login_password.h"
 
 Core::Core() {
+    storage = new File();
     size_t sizeOfLoadedUsers;
     std::vector< authInfo > loadedUsers;
-    void* ptr = &loadedUsers;
+    char* ptr = (char *)&loadedUsers;
     storage->Get( "LocalLoginsPasswords", ptr, sizeOfLoadedUsers );  // TODO:Use serializator
     authorizator = new AuthorizatorByLoginPassword( loadedUsers );
-    storage = new File();
 };
 
 Core::~Core() {
     size_t sizeOfLoadedOldUsers;
     std::vector< authInfo > loadedOldUsers;
-    void* ptr = &loadedOldUsers;
+    char* ptr = (char *)&loadedOldUsers;
     storage->Get( "LocalLoginsPasswords", ptr, sizeOfLoadedOldUsers );  // TODO:Use serializator
 //    std::vector< authInfo > gotNewUsers = authorizator->GotUsers();  // TODO: Save new users
 /*    if( gotNewUsers != loadedOldUsers ){
         storage->Set( "LocalLoginsPasswords", gotNewUsers, gotNewUsers.size() * sizeof( gotNewUsers[0] ) );  // TODO:Use serializator
     } */
     delete authorizator;
+    delete storage;
 };
 
 Response Core::ExecuteRequest( Request request  ) {
@@ -63,7 +65,8 @@ Response Core::ExecuteRequest( Request request  ) {
 
 Status Core::RemoveSession( Session session ) {
     if ( !IsSessionActive( session ) ) {
-        return UNKNOWN_ERROR;  // TODO: Throw exception
+        throw NotAuthorized();
+        return UNKNOWN_ERROR;
     }
     for ( auto i : sessions ) {
         if( i == session ) {
