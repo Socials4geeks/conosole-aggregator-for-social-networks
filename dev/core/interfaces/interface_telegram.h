@@ -5,7 +5,7 @@
 #include <vector>
 
 #include "termcolor.h"
-#include "interfaces.h"
+#include "interface_typical.h"
 
 class InterfaceTelegram : public InterfaceTypical {
 public:

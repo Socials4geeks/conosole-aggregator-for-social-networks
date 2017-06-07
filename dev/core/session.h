@@ -17,14 +17,14 @@
 class Session {
 public:
     Session();
-    Session( std::wstring login );
-    Session( std::wstring login, params settings );
-    authInfo GetAuthForApi( std::wstring nameOfRemoteAccount ); //Take id of SN. For example, "vk1"
+    Session( std::string login );
+    Session( std::string login, params settings );
+    authInfo GetAuthForApi( std::string nameOfRemoteAccount ); //Take id of SN. For example, "vk1"
     bool operator==( Session );
     ~Session();
 
 private:
-    std::wstring localLogin;
+    std::string localLogin;
     std::map< std::string, authInfo > authsForSocialNetworks;
     params user_settings;
     bool EmptySession;

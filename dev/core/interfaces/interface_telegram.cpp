@@ -1,6 +1,6 @@
 #include "interface_telegram.h"
 
-InterfaceTelegram::InterfaceTelegram(): {
+InterfaceTelegram::InterfaceTelegram() {
     name_of_social_network = "telegram";
 }
 

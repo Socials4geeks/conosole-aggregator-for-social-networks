@@ -6,11 +6,11 @@
 #include <ctime>
 #include <string>
 
-typedef std::pair< std::wstring, std::wstring > authInfo;
+typedef std::pair< std::string, std::string > authInfo;
 
-typedef std::map< std::string, std::wstring > params;
+typedef std::map< std::string, std::string > params;
 
-enum TypeOfAction{
+enum TypeOfAction {
     UNKNOWN,
     NEW_LOCAL_ACCOUNT,
     LOGIN_LOCAL_ACCOUNT,
@@ -24,7 +24,7 @@ enum TypeOfAction{
     REMOVE_FRIEND
 };
 
-enum TypeOfResponse{
+enum TypeOfResponse {
     MESSAGES,
     WALL,
     FRIENDS,
@@ -45,7 +45,7 @@ Request::Request() {
     Action = UNKNOWN;
 }
 
-struct Response{
+struct Response {
     std::string IdOfRemoteAccount;
     TypeOfResponse Type;
     std::vector< params > Params;
@@ -65,9 +65,9 @@ enum Status{
 
 /// API data structures
 
-typedef std::pair<time_t, std::wstring> TokenInfo;
+typedef std::pair<time_t, std::string> TokenInfo;
 
-typedef std::vector< std::pair<std::wstring, std::wstring> > UrlParams;
+typedef std::vector< std::pair<std::string, std::string> > UrlParams;
 
 enum Sex{
     NOT_DEFINED,
@@ -77,15 +77,15 @@ enum Sex{
 
 struct ProfileInfo {
     int uid;
-    std::wstring first_name;
-    std::wstring last_name;
-    std::wstring screen_name;
+    std::string first_name;
+    std::string last_name;
+    std::string screen_name;
     Sex sex;
-    std::wstring home_town;
-    std::wstring country;
-    std::wstring city;
-    std::wstring status;
-    std::wstring phone;
+    std::string home_town;
+    std::string country;
+    std::string city;
+    std::string status;
+    std::string phone;
 };
 
 struct Message {
@@ -94,8 +94,8 @@ struct Message {
     bool out;
     size_t uid;
     bool read_state;
-    std::wstring title;
-    std::wstring body;
+    std::string title;
+    std::string body;
 };
 
 /// Exceptions

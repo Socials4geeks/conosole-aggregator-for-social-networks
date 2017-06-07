@@ -18,6 +18,9 @@ public:
     virtual Status PrintURl( Response data );
 
     Request Input();
+
+private:
+    Status PrintURL( Response data );
 };
 
 #endif /* interface_basic_h */
