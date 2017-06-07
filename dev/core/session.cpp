@@ -4,16 +4,16 @@ Session::Session(): EmptySession( true ) {
     //TODO
 };
 
-Session::Session( std::wstring login ) : 
+Session::Session( std::string login ) : 
     localLogin( login ),
     EmptySession( false ) {};
 
-Session::Session( std::wstring login, params settings ) : 
+Session::Session( std::string login, params settings ) : 
     localLogin( login ),
     EmptySession( false ),
     user_settings( settings ) {};
 
-authInfo Session::GetAuthForApi( std::wstring nameOfRemoteAccount ) {
+authInfo Session::GetAuthForApi( std::string nameOfRemoteAccount ) {
     return authsForSocialNetworks[ "nameOfRemoteAccount" ];
 }
 

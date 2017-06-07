@@ -12,39 +12,39 @@ InterfaceTypical::~InterfaceTypical() {
 
 Status InterfaceTypical::PrintMessages( Response data ) {
     if (data.Type == ERROR) {
-        std::wstring reason = data.Params[0].at("reason");
-        std::wcout << termcolor::red << reason << termcolor::reset << std::endl;
+        std::string reason = data.Params[0].at("reason");
+        std::cout << termcolor::red << reason << termcolor::reset << std::endl;
 
     }
     for (int i = 0 ; i < data.Params.size(); i++) {
-        std::wcout << termcolor::reset << L"[" << data.Params[i]["datetime"] << L"] "
-                   << termcolor::colorizewstringByHash(data.Params[i]["username"]) << termcolor::reset << L": ";
+        std::cout << termcolor::reset << "[" << data.Params[i]["datetime"] << "] "
+                   << termcolor::colorizeStringByHash(data.Params[i]["username"]) << termcolor::reset << ": ";
         if (data.Params[i]["title"] != "") {
-            std::wcout << termcolor::bold << data.Params[i]["title"] << termcolor::reset << std::endl;
+            std::cout << termcolor::bold << data.Params[i]["title"] << termcolor::reset << std::endl;
         }
-        std::wcout << data.Params[i]["body"] << std::endl;
+        std::cout << data.Params[i]["body"] << std::endl;
     }
     return OK;
 };
 
 Status InterfaceTypical::PrintWall( Response data ) {
-    std::wcout << termcolor::on_red << L"Access violation:"
-              << termcolor::reset << L" Unavailable in current version." << std::endl;
+    std::cout << termcolor::on_red << "Access violation:"
+              << termcolor::reset << " Unavailable in current version." << std::endl;
     return OK;
 };
 
 Status InterfaceTypical::PrintFriends( Response data ) {
     std::sort(data.Params.begin(), data.Params.end(), 
               [](params & a, params & b) -> bool { 
-                  return (a["is_online"] > b["is_online"]);
+                  return ((a["is_online"] == "true") > (b["is_online"] == "true"));
               });
 
     for (int i = 0; i < data.Params.size(); i++) {
-        if (data[i].Params["is_online"]) {
-            std::wcout << termcolor::green << data[i].Params["username"] << termcolor::reset << L": online" << std::endl;
+        if (data.Params[i]["is_online"] == "true") {
+            std::cout << termcolor::green << data.Params[i]["username"] << termcolor::reset << ": online" << std::endl;
         } else {
-            std::wcout << termcolor::red << data[i].Params["username"] << termcolor::reset
-                      << L": " << data[i].Params["last_enter"] << std::endl;
+            std::cout << termcolor::red << data.Params[i]["username"] << termcolor::reset
+                      << ": " << data.Params[i]["last_enter"] << std::endl;
         }
     }
 
@@ -52,23 +52,23 @@ Status InterfaceTypical::PrintFriends( Response data ) {
 };
 
 template<typename Out>
-void InterfaceTypical::split(const std::wstring &s, char delim, Out result) {
-    std::wstringstream ss;
+void InterfaceTypical::split(const std::string &s, char delim, Out result) {
+    std::stringstream ss;
     ss.str(s);
-    std::wstring item;
+    std::string item;
     while (std::getline(ss, item, delim)) {
         *(result++) = item;
     }
 }
 
-std::vector<std::wstring> InterfaceTypical::split(const std::wstring &s, char delim) {
-    std::vector<std::wstring> elems;
+std::vector<std::string> InterfaceTypical::split(const std::string &s, char delim) {
+    std::vector<std::string> elems;
     split(s, delim, std::back_inserter(elems));
     return elems;
 }
 
-std::vector<std::wstring> InterfaceTypical::split_to_tokens(std::wstring command) {
-    std::vector<std::wstring> qargs;
+std::vector<std::string> InterfaceTypical::split_to_tokens(std::string command) {
+    std::vector<std::string> qargs;
     int len = command.length();
     bool qot = false, sqot = false;
     int arglen;
@@ -109,8 +109,8 @@ std::vector<std::wstring> InterfaceTypical::split_to_tokens(std::wstring command
     return qargs;
 }
 
-params InterfaceTypical::split_to_kwargs(std::vector<std::wstring>& args) {
-    std::map<std::string, std::wstring> kwargs;
+params InterfaceTypical::split_to_kwargs(std::vector<std::string>& args) {
+    std::map<std::string, std::string> kwargs;
     for (int i = 0; i < args.size(); i++) {
         if (args[i][0] == '-') {
             if (i + 1 < args.size() || args[i + 1][0] != '-') {
@@ -123,28 +123,28 @@ params InterfaceTypical::split_to_kwargs(std::vector<std::wstring>& args) {
     return kwargs;
 }
 
-TypeOfAction wstring_to_action(std::wstring wstr) {
-    if (wstr == L"new_local_account")
+TypeOfAction string_to_action(std::string str) {
+    if (str == "new_local_account")
         return NEW_LOCAL_ACCOUNT;
-    else if (wstr == L"login_local_account")
+    else if (str == "login_local_account")
         return LOGIN_LOCAL_ACCOUNT;
-    else if (wstr == L"show_messages")
+    else if (str == "show_messages")
         return SHOW_MESSAGES;
-    else if (wstr == L"show_friends")
+    else if (str == "show_friends")
         return SHOW_FRIENDS;
-    else if (wstr == L"add_wall")
+    else if (str == "add_wall")
         return ADD_WALL;
-    else if (wstr == L"add_friend")
+    else if (str == "add_friend")
         return ADD_FRIEND;
-    else if (wstr == L"remove_friend")
+    else if (str == "remove_friend")
         return REMOVE_FRIEND;
     else
         return UNKNOWN;
 }
 
 Request InterfaceTypical::Input() {
-    std::wstring line;
-    std::wstring account, command;
+    std::string line;
+    std::string account, command;
     Request request;
     while (true) {
         std::getline(std::cin, line);
@@ -152,19 +152,19 @@ Request InterfaceTypical::Input() {
         std::istringstream in(line);
         in >> account;
         in >> command;
-        if (account == L"" || command == L"") {
-            std::wcout << termcolor::red << L"Syntax error." << termcolor::reset << L" Type 'help' for help" << std::endl;
+        if (account == "" || command == "") {
+            std::cout << termcolor::red << "Syntax error." << termcolor::reset << " Type 'help' for help" << std::endl;
             continue;
         }
         request.IdOfRemoteAccount = (std::string) account;
-        request.Action = wstring_to_action(command);
+        request.Action = string_to_action(command);
         if (in.peek() == EOF) {
             break;
         } else {
-            std::wstring args_str;
+            std::string args_str;
             std::getline(in, args_str);
             auto args_vec = split_to_tokens(args_str);
-            std::map<std::string, std::wstring> kwargs = split_to_kwargs(args_vec);
+            std::map<std::string, std::string> kwargs = split_to_kwargs(args_vec);
             request.Params = kwargs;
             break;
         }

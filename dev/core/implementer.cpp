@@ -12,7 +12,7 @@ Response Implementer::ExecuteRequest( Request request ) {  //TODO: Split on basi
     Response newResponse;
     newResponse.IdOfRemoteAccount = request.IdOfRemoteAccount;
     newResponse.Type = ERROR;
-    if ( request.Params["SOCIAL_NETWORK_NAME"] == L"") {
+    if ( request.Params["SOCIAL_NETWORK_NAME"] == "") {
         if( false ) { //TODO: if request.action in allowed actions of basic functions
             basicFunctional.Hello();
         }

@@ -29,7 +29,7 @@ Status InterfaceBasic::PrintFriends( Response data ) {
 };
 
 Status InterfaceBasic::PrintURL( Response data ) {
-    std::wcout << termcolor::green << L"To authenticate, plase go to link: "
+    std::cout << termcolor::green << "To authenticate, plase go to link: "
               << termcolor::reset << data.Params[0]["url"] << std::endl;
     return OK;
 }

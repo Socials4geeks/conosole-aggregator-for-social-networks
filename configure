@@ -26,7 +26,7 @@ else
     exit 1
 fi
 
-if git clone https://github.com/Microsoft/cpprestsdk.git casablanca &&
+if  git clone https://github.com/Microsoft/cpprestsdk.git casablanca &&
    cd casablanca/Release &&
    mkdir temp.casablanca.build.release &&
    cd temp.casablanca.build.release &&

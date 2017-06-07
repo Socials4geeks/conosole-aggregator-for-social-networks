@@ -14,7 +14,7 @@ public:
 private:
     
     BasicFunctions basicFunctional;
-    std::map< std::wstring, APIInterface* > apiInterfaces;
+    std::map< std::string, APIInterface* > apiInterfaces;
 };
 
 

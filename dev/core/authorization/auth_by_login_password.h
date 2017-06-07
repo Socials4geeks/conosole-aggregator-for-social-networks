@@ -10,8 +10,8 @@ public:
     AuthorizatorByLoginPassword( std::vector< authInfo > existingUsers );
     ~AuthorizatorByLoginPassword();
 
-    virtual void Signup( std::wstring username, std::wstring password );
-    virtual Session Login( std::wstring username, std::wstring password );
+    virtual void Signup( std::string username, std::string password );
+    virtual Session Login( std::string username, std::string password );
     virtual int Logout( Session session );
 };
 
