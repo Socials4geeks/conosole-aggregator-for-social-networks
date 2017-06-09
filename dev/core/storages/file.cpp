@@ -1,16 +1,16 @@
-#include "file.h"
-
 #include <string>
 #include <fstream>
 
 #include "types.h"
+#include "file.h"
+
 // Методы File
 
-File() : Storage(), handler(nullptr) {};
+File::File() : Storage(), handler(nullptr) {};
 
-File( void* data, size_t size ) : Storage( data, size ), handler(nullptr) {};
+File::File( char* data, size_t size ) : Storage( data, size ), handler(nullptr) {};
 
-File( size_t size ) : Storage( size ), handler(nullptr) {};
+File::File( size_t size ) : Storage( size ), handler(nullptr) {};
 
 File::File( File& file )
 {
@@ -24,33 +24,33 @@ File::File( File&& file )
     handler = file.handler;
 }
 
-status File::Set( std::string key, void* data, size_t bytes )
+Status File::Set( std::string key, char* data, size_t bytes )
 {
-    handler.set_filename(key);
-    handler.open();
-    handler.write(data, bytes);
-    handler.close();
+    handler->set_filename(key);
+    handler->open();
+    handler->write(data, bytes);
+    handler->close();
     return OK;
 }
 
-status File::Get( std::string key, void*& data, size_t& bytes )
+Status File::Get( std::string key, char*& data, size_t& bytes )
 {
-    handler.set_filename(key);
-    handler.open();
-    handler.read(data, bytes);
-    handler.close();
+    handler->set_filename(key);
+    handler->open();
+    handler->read(data, bytes);
+    handler->close();
     return OK;
 }
 
 // Методы FileHandler
 
-FileHandler( std::string name ) : Handler(), handler(nullptr), filename(name) {};
+FileHandler::FileHandler( std::string name ) : Handler(), file(nullptr), filename(name) {};
 
-FileHandler() : Handler(), handler(nullptr), filename("") {};
+FileHandler::FileHandler() : Handler(), file(nullptr), filename("") {};
 
 void FileHandler::open()
 {
-    file.open(filename, ios::binary | ios::app);
+    file.open(filename, std::ios::binary | std::ios::app);
 }
 
 void FileHandler::close()

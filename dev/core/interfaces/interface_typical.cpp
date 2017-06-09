@@ -35,7 +35,7 @@ Status InterfaceTypical::PrintWall( Response data ) {
 
 Status InterfaceTypical::PrintFriends( Response data ) {
     std::sort(data.Params.begin(), data.Params.end(), 
-              [](params & a, params & b) -> bool { 
+              [](params a, params b) -> bool { 
                   return ((a["is_online"] == "true") > (b["is_online"] == "true"));
               });
 

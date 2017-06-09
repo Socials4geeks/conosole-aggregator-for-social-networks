@@ -4,15 +4,16 @@
 #include <vector>
 
 #include "types.h"
+#include "authorization.h"
 
-class AuthorizatorByLoginPassword : public Authorizator{
+class AuthorizatorByLoginPassword : public Authorizator {
 public:
     AuthorizatorByLoginPassword( std::vector< authInfo > existingUsers );
     ~AuthorizatorByLoginPassword();
 
     virtual void Signup( std::string username, std::string password );
     virtual Session Login( std::string username, std::string password );
-    virtual int Logout( Session session );
+    virtual Status Logout( Session session );
 };
 
 

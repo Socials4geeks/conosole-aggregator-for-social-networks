@@ -26,7 +26,7 @@ else
     exit 1
 fi
 
-if  git clone https://github.com/Microsoft/cpprestsdk.git casablanca &&
+if git clone https://github.com/Microsoft/cpprestsdk.git casablanca &&
    cd casablanca/Release &&
    mkdir temp.casablanca.build.release &&
    cd temp.casablanca.build.release &&
@@ -37,6 +37,7 @@ if  git clone https://github.com/Microsoft/cpprestsdk.git casablanca &&
    cd .. &&
    make install &&
    cd ../../.. &&
+   mkdir include &&
    for h in $(find dev -regex '.*\.\(h\|hpp\)')
        do cp -f $h include/
    done

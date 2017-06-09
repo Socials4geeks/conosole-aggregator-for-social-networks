@@ -8,10 +8,10 @@
 #include <cpprest/filestream.h>
 #include <cpprest/json.h>
 #include <cpprest/uri.h>
-#include <cpprest/uribuilder.h>
+#include <cpprest/uri_builder.h>
 
-#include "core/API/API_vk.h"
-#include "constats.h"
+#include "API_vk.h"
+#include "constants.h"
 #include "types.h"
 
 using namespace boost;
@@ -23,7 +23,7 @@ using namespace web::http;                  // Common HTTP functionality
 using namespace web::http::client;          // HTTP client features
 using namespace concurrency::streams;       // Asynchronous streams
 
-int API_vk::Authorize( AuthInfo loginPassword ) {
+int API_vk::Authorize( authInfo loginPassword ) {
     ProfileInfo user = getProfileInfo();
 
     if( IsAuthorised == status::OK ) {
