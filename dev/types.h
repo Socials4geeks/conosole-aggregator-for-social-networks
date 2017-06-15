@@ -1,3 +1,12 @@
+/**
+* \file
+* \brief Описание используемых типов, структур и перечислений.
+*
+* Различные нестандартные структуры, необходимые в других файлах.
+* 
+* \todo Исправить "???" на нужные комментарии.
+*/
+
 #ifndef types_h
 #define types_h
 
@@ -10,45 +19,57 @@ typedef std::pair< std::string, std::string > authInfo;
 
 typedef std::map< std::string, std::string > params;
 
+
+/// Вариант запроса пользователя.
 enum TypeOfAction {
-    UNKNOWN,
-    NEW_LOCAL_ACCOUNT,
-    LOGIN_LOCAL_ACCOUNT,
-    LOGOUT_LOCAL_ACCOUNT,
-    SHOW_MESSAGES,
-    SHOW_WALL,
-    SHOW_FRIENDS,
-    SEND_MESSAGE,
-    ADD_WALL,
-    ADD_FRIEND,
-    REMOVE_FRIEND
+    UNKNOWN,  ///< Неизвестное действие.
+    NEW_LOCAL_ACCOUNT,  ///< Создать локальный аккаунт.
+    LOGIN_LOCAL_ACCOUNT,  ///< Войти в локальный аккаунт.
+    LOGOUT_LOCAL_ACCOUNT,  ///< Выйти из локального аккаунта.
+    SHOW_MESSAGES,  ///< Показать сообщения из диалога.
+    SHOW_WALL,  ///< Показать сообщения со стены.
+    SHOW_FRIENDS,  ///< Показать список друзей.
+    SEND_MESSAGE,  ///< Послать сообщение.
+    ADD_WALL,  ///< Добавить запись на стену.
+    ADD_FRIEND,  ///< Добавить контакт.
+    REMOVE_FRIEND  ///< Удалить контакт.
 };
 
-enum TypeOfResponse {
-    MESSAGES,
-    WALL,
-    FRIENDS,
-    LOGIN_STATUS,
-    ACCEPT,
-    ERROR,
-}; 
 
+/// Варинты ответа пользователю.
+enum TypeOfResponse {
+    MESSAGES,  ///< Сообщения из диалога.
+    WALL,  ///< Записи со стены.
+    FRIENDS,  ///< Список друзей.
+    LOGIN_STATUS,  ///< Статус пользователя.
+    ACCEPT,  ///< ???
+    ERROR,  ///< Сообщение об ошибке.
+};
+
+/**
+* \brief Запрос, посылаемый пользователем.
+*/
 struct Request {
-    std::string IdOfRemoteAccount;
-    TypeOfAction Action;
-    params Params;
+    std::string IdOfRemoteAccount;  ///< Идентификатор аккаунта.
+    TypeOfAction Action;  ///< Тип действия, совершаемого запросом.
+    params Params;   ///< Параметры запроса. Могут быть невалидным, требуют проверки при получении.
 
     Request();
 };
+
 
 Request::Request() {
     Action = UNKNOWN;
 }
 
+
+/**
+* \brief Ответ пользователю.
+*/
 struct Response {
-    std::string IdOfRemoteAccount;
-    TypeOfResponse Type;
-    std::vector< params > Params;
+    std::string IdOfRemoteAccount;  ///< Идентификатор аккаунта.
+    TypeOfResponse Type;  ///< Тип ответа.
+    std::vector< params > Params;  ///< Список параметров ответа.
 
     Response();
 };
@@ -57,9 +78,10 @@ Response::Response() {
     Type = ERROR;
 }
 
-enum Status{
-    OK,
-    UNKNOWN_ERROR
+/// Возвращаемый статус многих функций.
+enum Status {
+    OK,  ///< Всё хорошо.
+    UNKNOWN_ERROR  ///< Неизвестная ошибка.
 };
 
 
@@ -67,35 +89,42 @@ enum Status{
 
 typedef std::pair<time_t, std::string> TokenInfo;
 
+
 typedef std::vector< std::pair<std::string, std::string> > UrlParams;
 
-enum Sex{
-    NOT_DEFINED,
-    WOMEN,
-    MEN
+
+/// Пол человека.
+enum Sex {
+    NOT_DEFINED,  ///< Не определён.
+    WOMEN,  ///< Женский.
+    MEN  ///< Мужской.
 };
 
+
+/// Информация о пользователе.
 struct ProfileInfo {
-    int uid;
-    std::string first_name;
-    std::string last_name;
-    std::string screen_name;
-    Sex sex;
-    std::string home_town;
-    std::string country;
-    std::string city;
-    std::string status;
-    std::string phone;
+    int uid;  ///< Id.
+    std::string first_name;  ///< Имя.
+    std::string last_name;  ///< Фамилия.
+    std::string screen_name;  ///< Никнейм.
+    Sex sex;  ///< Пол.
+    std::string home_town;  ///< Родной город.
+    std::string country;  ///< Страна.
+    std::string city;  ///< Текущий город.
+    std::string status;  ///< Статус.
+    std::string phone;  ///< Номер телефона.
 };
 
+
+/// Структура, отвечающая за хранение собщения.
 struct Message {
-    size_t mid;
-    size_t date;
-    bool out;
-    size_t uid;
-    bool read_state;
-    std::string title;
-    std::string body;
+    size_t mid;  ///< ???
+    size_t date;  ///< Дата отправки.
+    bool out;  ///< Исходящее или входящее сообщение.
+    size_t uid;  ///< ???
+    bool read_state;  ///< Статус прочтения.
+    std::string title;  ///< Заголовок сообщения.
+    std::string body;  ///< Тело сообщения.
 };
 
 /// Exceptions

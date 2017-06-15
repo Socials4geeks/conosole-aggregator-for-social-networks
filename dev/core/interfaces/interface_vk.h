@@ -11,6 +11,11 @@
 #include "interfaces.h"
 #include "interface_typical.h"
 
+
+/**
+* Интерфейс для ВК, практически без изменений наследует типичный интерфейс.
+*
+*/
 class InterfaceVK : public InterfaceTypical {
 public:
     InterfaceVK();
