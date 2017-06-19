@@ -8,6 +8,12 @@
 
 File::File() : Storage(), handler(nullptr) {};
 
+File::~File()
+{
+    handler->close();
+    delete handler;
+}
+
 File::File( char* data, size_t size ) : Storage( data, size ), handler(nullptr) {};
 
 File::File( size_t size ) : Storage( size ), handler(nullptr) {};

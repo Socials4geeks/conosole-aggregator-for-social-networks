@@ -5,8 +5,9 @@
 #include <string>
 
 #include "core.h"
-#include "storeges.h"
+#include "storages.h"
 #include "session.h"
+#include "interfaces.h"
 #include "authorization.h"
 
 class Application {

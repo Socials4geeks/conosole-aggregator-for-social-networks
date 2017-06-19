@@ -16,6 +16,7 @@ const char root_dir[] = "/tmp/storages/";
 class File : public Storage {
   public:
     File();
+    virtual ~File();
     /// Аллоцирующий конструктор, выделяющий сразу size байт под данные
     File( size_t size );
     /// Конструктор, заполняющий буфер данными
@@ -39,7 +40,7 @@ class File : public Storage {
 class FileHandler : Handler {
   public:
     FileHandler();
-    ~FileHandler();
+    virtual ~FileHandler();
     /// Конструктор, инициализирующий название файла
     FileHandler( std::string name );
     void set_filename( std::string name );

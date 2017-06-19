@@ -1,4 +1,4 @@
-#include "basic_functional.cpp"
+#include "basic_functional.h"
 #include "types.h"
 #include "exceptions.h"
 
