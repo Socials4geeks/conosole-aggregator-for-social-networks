@@ -18,7 +18,7 @@ public:
     
 private:
     Core core;
-    std::vector< Interface > ui;
+    std::vector< Interface* > ui;
     Interface* curUi;
     std::string curSocialNetwork;
     
