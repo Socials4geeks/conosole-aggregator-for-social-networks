@@ -32,3 +32,11 @@ Status InterfaceBasic::PrintURL( Response data ) {
               << termcolor::reset << data.Params[0]["url"] << std::endl;
     return OK;
 }
+
+
+Status InterfaceBasic::PrintError( Response data ) {
+    std::cout << termcolor::on_red << "Error:"
+              << termcolor::reset << " " << data.Params[0]["reason"] << std::endl;
+    return OK;
+};
+
