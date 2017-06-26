@@ -7,6 +7,9 @@ AuthorizatorByLoginPassword::AuthorizatorByLoginPassword( std::vector< authInfo 
 
 AuthorizatorByLoginPassword::~AuthorizatorByLoginPassword() {};
 
+// TODO
+void AuthorizatorByLoginPassword::Signup( std::string username, std::string password ) {};
+
 Session AuthorizatorByLoginPassword::Login( std::string username, std::string password ) {
     std::pair< std::string, std::string > authData = std::make_pair( username, password );
     for( auto i : users ) {

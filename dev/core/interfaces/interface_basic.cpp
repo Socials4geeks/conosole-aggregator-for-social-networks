@@ -1,4 +1,5 @@
 #include "interface_basic.h"
+#include "types.h"
 
 InterfaceBasic::InterfaceBasic(){
 
@@ -40,3 +41,5 @@ Status InterfaceBasic::PrintError( Response data ) {
     return OK;
 };
 
+// TODO
+Request InterfaceBasic::Input() {}
