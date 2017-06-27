@@ -11,9 +11,8 @@ public:
     AuthorizatorByLoginPassword( std::vector< authInfo > existingUsers );
     virtual ~AuthorizatorByLoginPassword();
 
-    virtual void Signup( std::string username, std::string password );
+    virtual Status Signup( std::string username, std::string password );
     virtual Session Login( std::string username, std::string password );
-    virtual Status Logout( Session session );
 };
 
 
