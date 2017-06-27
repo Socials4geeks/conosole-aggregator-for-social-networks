@@ -58,6 +58,7 @@ Response Implementer::ExecuteRequest( Request request ) {  //TODO: Split on basi
                 };
             }
         }
-    }           
+    }
+    return newResponse;
 }
 

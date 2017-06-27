@@ -34,6 +34,7 @@ File::File( File&& file )
 
 Status File::Set( std::string key, char* data, size_t bytes )
 {
+    if(!handler) return UNKNOWN_ERROR;
     handler->set_filename(key);
     handler->open();
     handler->write(data, bytes);
@@ -43,6 +44,7 @@ Status File::Set( std::string key, char* data, size_t bytes )
 
 Status File::Get( std::string key, char*& data, size_t& bytes )
 {
+    if(!handler) return UNKNOWN_ERROR;
     handler->set_filename(key);
     handler->open();
     handler->read(data, bytes);

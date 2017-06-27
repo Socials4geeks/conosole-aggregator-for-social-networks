@@ -29,7 +29,7 @@ class Storage {
 
   public:
     Storage();
-    ~Storage();
+    virtual ~Storage();
     Storage( Storage& storage );
     Storage( Storage&& storage );
     /// Аллоцирующий конструктор, выделяющий сразу size байт под данные

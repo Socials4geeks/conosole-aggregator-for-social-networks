@@ -4,7 +4,10 @@
 #include "exceptions.h"
 #include "auth_by_login_password.h"
 
+#include <utility>
+
 Core::Core() {
+    wasLoadedUsers = false;
     storage = new File();
     size_t sizeOfLoadedUsers;
     std::vector< authInfo > loadedUsers;
@@ -16,12 +19,15 @@ Core::Core() {
 Core::~Core() {
     size_t sizeOfLoadedOldUsers;
     std::vector< authInfo > loadedOldUsers;
+    
     char* ptr = (char *)&loadedOldUsers;
-    storage->Get( "LocalLoginsPasswords", ptr, sizeOfLoadedOldUsers );  // TODO:Use serializator
-//    std::vector< authInfo > gotNewUsers = authorizator->GotUsers();  // TODO: Save new users
-/*    if( gotNewUsers != loadedOldUsers ){
-        storage->Set( "LocalLoginsPasswords", gotNewUsers, gotNewUsers.size() * sizeof( gotNewUsers[0] ) );  // TODO:Use serializator
-    } */
+    if ( storage->Get( "LocalLoginsPasswords", ptr, sizeOfLoadedOldUsers ) == OK ) {  // TODO:Use serializator
+        wasLoadedUsers = true;
+    }
+    std::vector< authInfo > gotNewUsers = authorizator->GetUsers();  // TODO: Save new users
+    if( !wasLoadedUsers || ( gotNewUsers != loadedOldUsers ) ){ //TODO Save Users with serializator
+//        storage->Set( "LocalLoginsPasswords", gotNewUsers, gotNewUsers.size() * sizeof( gotNewUsers[0] ) );
+    }
     delete authorizator;
     delete storage;
 };
@@ -29,18 +35,32 @@ Core::~Core() {
 Response Core::ExecuteRequest( Request request  ) {
     Response response;
     response.Type = ERROR;
+    params tmp;
+    tmp.insert( std::make_pair( "SOCIAL_NETWORK_NAME", request.Params[ "SOCIAL_NETWORK_NAME" ] ) );
+    response.Params.push_back( tmp );
     switch ( request.Action ) {
         case NEW_LOCAL_ACCOUNT: {
-            authorizator->Signup( request.Params[ "LOCAL_USERNAME" ], request.Params[ "LOCAL_PASSWORD" ] );
-            break; //Return response
+            if( request.Params.find( "LOCAL_USERNAME" ) == request.Params.end() ||
+               request.Params.find( "LOCAL_PASSWORD" ) == request.Params.end()  ) {
+                return response;
+            }
+            if( authorizator->Signup( request.Params[ "LOCAL_USERNAME" ], request.Params[ "LOCAL_PASSWORD" ] ) != OK ) {
+                return response;
+            }
+            response.Type = ACCEPT;
+            break;
         }
         case LOGIN_LOCAL_ACCOUNT: {
-            activeSession = authorizator->Login( request.Params[ "LOCAL_USERNAME" ], request.Params[ "LOCAL_PASSWORD" ] );
-            break; //Return response
+            try {
+                activeSession = authorizator->Login( request.Params[ "LOCAL_USERNAME" ], request.Params[ "LOCAL_PASSWORD" ] );
+                response.Type = ACCEPT;
+            } catch ( BadAuth ) {}
+            break;
         }
         case LOGOUT_LOCAL_ACCOUNT: {
             activeSession = Session();
-            break; //Return response
+            response.Type = ACCEPT; //TODO: Предусмотреть другие варианты
+            break;
         }
         case SHOW_MESSAGES:
         case SHOW_WALL:
@@ -53,14 +73,10 @@ Response Core::ExecuteRequest( Request request  ) {
             request.Params[ "REMOTE_LOGIN" ] = tmp.first;
             request.Params[ "REMOTE_PASSWORD" ] = tmp.second;
             response = implementer.ExecuteRequest( request );
-            return response;
-            break;
-        }
-        default: {
-            return response;
             break;
         }
     }
+    return response;
 }
 
 Status Core::RemoveSession( Session session ) {
