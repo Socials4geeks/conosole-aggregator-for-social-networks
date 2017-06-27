@@ -1,11 +1,12 @@
 #include "application.h"
+#include "interfaces.h"
 #include "interface_basic.h"
 #include "interface_vk.h"
 
 Application::Application(){
     ui.push_back( new InterfaceBasic() );
     curUi = ui[0]; //TODO: Replace to anything better
-    curUi->PrintHello();
+    Interface::PrintHello();
     Request request = curUi->Input();
     executeRequest( request );
 }
