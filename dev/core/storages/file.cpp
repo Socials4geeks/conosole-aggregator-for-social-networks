@@ -4,6 +4,8 @@
 #include "types.h"
 #include "file.h"
 
+const char root_dir[] = "/tmp/storages/";
+
 // Методы File
 
 File::File() : Storage(), handler(nullptr) {};
@@ -82,4 +84,18 @@ std::string FileHandler::get_filename()
 FileHandler::~FileHandler()
 {
     file.close();
+}
+
+void FileHandler::write(char* data, size_t size)
+{
+    file.write(data, size);
+}
+
+void FileHandler::read(char*& data, size_t& size)
+{
+    file.seekg (0, file.end);
+    size = file.tellg();
+    file.seekg (0, file.beg);
+    data = new char[size];
+    file.read(data, size);
 }

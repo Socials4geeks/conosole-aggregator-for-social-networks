@@ -1,3 +1,6 @@
+#ifndef FILE_H
+#define FILE_H
+
 #include <string>
 #include <fstream>
 
@@ -11,7 +14,7 @@
 
 class FileHandler;
 
-const char root_dir[] = "/tmp/storages/";
+extern const char root_dir[];
 
 class File : public Storage {
   public:
@@ -57,3 +60,5 @@ class FileHandler : Handler {
     std::fstream file;
     std::string filename;
 };
+
+#endif  // FILE_H

@@ -14,14 +14,7 @@
 class InterfaceTelegram : public InterfaceTypical {
 public:
     InterfaceTelegram();
-    ~InterfaceTelegram();
-
-    virtual Status PrintMessages( Response data );
-    virtual Status PrintWall( Response data );
-    virtual Status PrintFriends( Response data );
-    virtual Status PrintError( Response data );
-
-    virtual Request Input();
+    virtual ~InterfaceTelegram();
 };
 
 #endif /* interface_telegram_h */

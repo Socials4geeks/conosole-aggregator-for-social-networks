@@ -19,7 +19,6 @@ typedef std::pair< std::string, std::string > authInfo;
 
 typedef std::map< std::string, std::string > params;
 
-
 /// Вариант запроса пользователя.
 enum TypeOfAction {
     UNKNOWN,  ///< Неизвестное действие.
@@ -34,7 +33,6 @@ enum TypeOfAction {
     ADD_FRIEND,  ///< Добавить контакт.
     REMOVE_FRIEND  ///< Удалить контакт.
 };
-
 
 /// Варинты ответа пользователю.
 enum TypeOfResponse {
@@ -57,12 +55,6 @@ struct Request {
     Request();
 };
 
-
-Request::Request() {
-    Action = UNKNOWN;
-}
-
-
 /**
 * \brief Ответ пользователю.
 */
@@ -74,24 +66,17 @@ struct Response {
     Response();
 };
 
-Response::Response() {
-    Type = ERROR;
-}
-
 /// Возвращаемый статус многих функций.
 enum Status {
     OK,  ///< Всё хорошо.
     UNKNOWN_ERROR  ///< Неизвестная ошибка.
 };
 
-
 /// API data structures
 
 typedef std::pair<time_t, std::string> TokenInfo;
 
-
 typedef std::vector< std::pair<std::string, std::string> > UrlParams;
-
 
 /// Пол человека.
 enum Sex {
@@ -99,7 +84,6 @@ enum Sex {
     WOMEN,  ///< Женский.
     MEN  ///< Мужской.
 };
-
 
 /// Информация о пользователе.
 struct ProfileInfo {
@@ -115,7 +99,6 @@ struct ProfileInfo {
     std::string phone;  ///< Номер телефона.
 };
 
-
 /// Структура, отвечающая за хранение собщения.
 struct Message {
     size_t mid;  ///< Уникальный идентификатор сообщения.
@@ -128,13 +111,10 @@ struct Message {
 };
 
 /// Exceptions
-
 class NotImplementedYet : public std::exception {};
-
 class UnknownError : public std::exception {};
-
 struct TemporaryBrowserAuthorization : public std::exception {
-    TemporaryBrowserAuthorization( TokenInfo& access_token ) : access_token(access_token) {};
+    TemporaryBrowserAuthorization( TokenInfo& access_token );
     TokenInfo& access_token;
     std::string authorization_url;
 };

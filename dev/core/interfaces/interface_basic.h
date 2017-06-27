@@ -20,6 +20,7 @@ public:
     virtual Status PrintMessages( Response data );
     virtual Status PrintFriends( Response data );
     virtual Status PrintWall( Response data );
+    virtual Status PrintError( Response data );
 
     Request Input();
 

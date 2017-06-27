@@ -19,14 +19,7 @@
 class InterfaceVK : public InterfaceTypical {
 public:
     InterfaceVK();
-    ~InterfaceVK();
-
-    virtual Status PrintMessages( Response data );
-    virtual Status PrintWall( Response data );
-    virtual Status PrintFriends( Response data );
-    virtual Status PrintError( Response data );
-
-    virtual Request Input();
+    virtual ~InterfaceVK();
 };
 
 #endif /* interface_vk_h */

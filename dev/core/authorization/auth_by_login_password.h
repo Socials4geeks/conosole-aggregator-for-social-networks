@@ -9,7 +9,7 @@
 class AuthorizatorByLoginPassword : public Authorizator {
 public:
     AuthorizatorByLoginPassword( std::vector< authInfo > existingUsers );
-    ~AuthorizatorByLoginPassword();
+    virtual ~AuthorizatorByLoginPassword();
 
     virtual void Signup( std::string username, std::string password );
     virtual Session Login( std::string username, std::string password );

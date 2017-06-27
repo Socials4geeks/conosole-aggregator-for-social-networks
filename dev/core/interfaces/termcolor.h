@@ -421,6 +421,7 @@ namespace termcolor
         std::string str;
     };
 
+    inline
     std::ostream& operator<< (std::ostream& os, const colorizeStringByHash& cu) {
         int color_number = 6;
         int hash = 0;
