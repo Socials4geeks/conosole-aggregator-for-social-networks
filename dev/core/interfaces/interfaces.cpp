@@ -20,6 +20,7 @@ Request Interface::Input() {
     std::string account, command;
     Request request;
     while (true) {
+        cin.clear();
         std::getline(std::cin, line);
 
         std::istringstream in(line);
@@ -116,9 +117,9 @@ params Interface::split_to_kwargs(std::vector<std::string>& args) {
     for (int i = 0; i < args.size(); i++) {
         if (args[i][0] == '-') {
             if (i + 1 < args.size() || args[i + 1][0] != '-') {
-                kwargs[args[i]] = args[i + 1];
+                kwargs[args[i].erase(0, 1)] = args[i + 1];
             } else {
-                kwargs[args[i]] = '\0';
+                kwargs[args[i].erase(0, 1)] = '\0';
             }
         }
     }
