@@ -42,7 +42,7 @@ enum TypeOfResponse {
     WALL,  ///< Записи со стены.
     FRIENDS,  ///< Список друзей.
     LOGIN_STATUS,  ///< Статус пользователя.
-    ACCEPT,  ///< ???
+    ACCEPT,  ///< Запрос успешно принят.
     ERROR,  ///< Сообщение об ошибке.
 };
 
@@ -118,10 +118,10 @@ struct ProfileInfo {
 
 /// Структура, отвечающая за хранение собщения.
 struct Message {
-    size_t mid;  ///< ???
+    size_t mid;  ///< Уникальный идентификатор сообщения.
     size_t date;  ///< Дата отправки.
     bool out;  ///< Исходящее или входящее сообщение.
-    size_t uid;  ///< ???
+    size_t uid;  ///< Уникальный идентификатор пользователя.
     bool read_state;  ///< Статус прочтения.
     std::string title;  ///< Заголовок сообщения.
     std::string body;  ///< Тело сообщения.
@@ -130,6 +130,8 @@ struct Message {
 /// Exceptions
 
 class NotImplementedYet : public std::exception {};
+
+class UnknownError : public std::exception {};
 
 struct TemporaryBrowserAuthorization : public std::exception {
     TemporaryBrowserAuthorization( TokenInfo& access_token ) : access_token(access_token) {};

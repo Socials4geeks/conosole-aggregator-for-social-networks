@@ -10,19 +10,19 @@ InterfaceBasic::~InterfaceBasic(){
 
 
 Status InterfaceBasic::PrintMessages( Response data ) {
-    PrintURL();
+    PrintURL( data );
     return OK;
 };
 
 
 Status InterfaceBasic::PrintWall( Response data ) {
-    PrintURL();
+    PrintURL( data );
     return OK;
 };
 
 
 Status InterfaceBasic::PrintFriends( Response data ) {
-    PrintURL();
+    PrintURL( data );
     return OK;
 };
 

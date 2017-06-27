@@ -8,6 +8,7 @@
 
 class APIInterface {
 public:
+    APIInterface();
     virtual Status SendMessage( authInfo loginPassword,  std::string topic, std::string text, std::string recipient, Response& response ) = 0;  // TODO: recipients => recipients
     /// Показывает n последних сообщений от пользователя user
     virtual Status ShowMessages( authInfo loginPassword, Response& response ) = 0;  // TODO: Show -> Get
@@ -20,7 +21,7 @@ public:
 protected:
     API* api;
 
-    virtual void login_if_not_logined( authInfo loginPassword ) = 0;
+    virtual Status _login_if_not_logined( int uid ) = 0;
     virtual Status checkCorrectLoginPassword( authInfo loginPassword, Response& response, int& uid ) = 0;
 };
 

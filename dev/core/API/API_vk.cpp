@@ -26,11 +26,11 @@ using namespace concurrency::streams;       // Asynchronous streams
 int API_vk::Authorize( authInfo loginPassword ) {
     ProfileInfo user = getProfileInfo();
 
-    if( IsAuthorised == status::OK ) {
+    if( IsAuthorized( user.uid ) == OK ) {
         return user.uid;
     }
 
-    std::wstiring auth_uri = wformat(httpFormatString) % "https" % "oauth.vk.com/authorize";
+    std::string auth_uri = str( format(httpFormatString) % "https" % "oauth.vk.com/authorize" );
     UrlParams auth_params = {
         {"client_id", VK_APP_ID},
         {"display", "page"},
@@ -40,13 +40,14 @@ int API_vk::Authorize( authInfo loginPassword ) {
         {"v", VERSION},
     };
 
-    std::for_each( auth_params.begin(), auth_params.end(), [&auth_uri]( std::pair<std::string, std::string> param ) {
-        result += wformat(httpGetParams) % param.first % param.second;
+    std::string result;
+    std::for_each( auth_params.begin(), auth_params.end(), [&auth_uri, &result]( std::pair<std::string, std::string> param ) {
+        result += str( format(httpGetParams) % param.first % param.second );
     });
 
 // TODO: посылать POST запрос с данными авторизации
-    TemporaryBrowserAuthorisation exception( cur_access_token );
-    exception.authorisation_uri = auth_uri;
+    TemporaryBrowserAuthorization exception( tokens[cur_uid] );
+    exception.authorization_url = auth_uri;
     throw exception;
 // ENDTODO
 
@@ -54,57 +55,57 @@ int API_vk::Authorize( authInfo loginPassword ) {
     TokenInfo cur_token = tokens[cur_uid];
 
     time_t now;
-    time( now );
+    time( &now );
     cur_token.first = cur_token.first + now;
     tokens[cur_uid] = cur_token;
 
-    return user.id;
+    return user.uid;
 }
 
 Status API_vk::IsAuthorized( int uid ) {
-    return if( tokens[uid].second == cur_access_token ) ? status::OK : status::ERROR;  // TODO: check, if access_token is leaked
+    return ( uid == cur_uid ) ? OK : UNKNOWN_ERROR;  // TODO: check, if access_token is leaked
 }
 
 ProfileInfo API_vk::getProfileInfo() {
-    std::string request_uri = buildApiUrl( std::string("account.getProfileInfo"), {}, true );
+    uri_builder request_uri = buildApiUrl( std::string("account.getProfileInfo"), {}, true );
 
     ProfileInfo user;
 
-    http_client client( request_uri );
+    http_client client( request_uri.to_uri() );
     http_request request( methods::GET );
     client.request( request ).then([]( http_response response ) {
-        if(response.status_code() == status_codes::OK) {
+        if(response.status_code() == OK) {
             return response.extract_json();
         } else {
             throw UnknownError();
         }
-    }).then([&user](json::value val) {
+    }).then([&user, this](json::value val) {
         json::value resp = val["response"];
             user.uid = cur_uid;
             user.first_name = val["first_name"].as_string();
             user.last_name = val["last_name"].as_string();
             user.screen_name = val["screen_name"].as_string();
-            user.sex = val["sex"].as_integer();
+            user.sex = static_cast<Sex>( val["sex"].as_integer() );
             user.home_town = val["home_town"].as_string();
             user.country = val["country"].as_string();
             user.city = val["city"].as_string();
             user.status = val["status"].as_string();
             user.phone = val["phone"].as_string();
-    }, task_continuation_context::use_current());
+    }, pplx::task_continuation_context::use_default());
 
     return user;
 };
 
 Status API_vk::SendMessage( authInfo loginPassword, std::string topic, std::string text, std::string recipient ) {
-    std::string request_uri = buildApiUrl( std::string("messages.send"), {}, true );
+    uri_builder request_uri = buildApiUrl( std::string("messages.send"), {}, true );
 
-    http_client client( request_uri );
+    http_client client( request_uri.to_uri() );
     http_request request( methods::GET );
-    return client.request( request ).then([]( http_response response ) {
-        if(response.status_code() == status_codes::OK) {
-            return Status::OK;
+    client.request( request ).then([]( http_response response ) {
+        if(response.status_code() == OK) {
+            return OK;
         } else {
-            return Status::ERROR;
+            return UNKNOWN_ERROR;
         }
     });
 }
@@ -117,17 +118,17 @@ std::vector<Message> API_vk::GetLastMessages( int uid ) {
     http_client client( request_uri.to_uri() );
     http_request request( methods::GET );
     client.request( request ).then([]( http_response response ) {
-        if(response.status_code() == status_codes::OK) {
+        if(response.status_code() == OK) {
             return response.extract_json();
         } else {
-            return json::value();
+            return pplx::task<json::value>();
         }
-    }).then([&messages]( json::value value ) {
+    }).then([&messages]( json::value val ) {
         if( val.is_null() ) {
             return;
         }
 
-        json::array resp = value["response"].as_array();
+        json::array resp = val["response"].as_array();
         std::for_each( resp.begin() + 1, resp.end(), [&messages]( json::value val ) {
             Message msg;
             msg.mid = val["mid"].as_integer();
@@ -140,16 +141,16 @@ std::vector<Message> API_vk::GetLastMessages( int uid ) {
 
             messages.push_back(msg);
         });
-    }, task_continuation_context::use_current());
+    }, pplx::task_continuation_context::use_default());
 
     return messages;
 }
 
 uri_builder API_vk::buildApiUrl( std::string method, UrlParams uri_params, bool is_private ) {
-    uri_builder result( wformat( httpFormatString ) % (is_private ? "https" : "http") + "api.vk.com/method");
+    uri_builder result( str( format( httpFormatString ) % (is_private ? "https" : "http") ) + "api.vk.com/method");
     result.append_path(method);
 
-    std::for_each( uri_params.begin(), uri_params.end(), [&result]( std::pair<std::wstirng, std::string> param ) {
+    std::for_each( uri_params.begin(), uri_params.end(), [&result]( std::pair<std::string, std::string> param ) {
         result.append_query( param.first, param.second );
     });
 

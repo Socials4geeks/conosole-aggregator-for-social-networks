@@ -36,9 +36,9 @@ class Storage {
     Storage( size_t size );
     /// Конструктор, заполняющий буфер данными
     Storage( char* data, size_t bytes );
-    /// Сохраняет bytes байтов данных data и возвращет handle
+    /// Сохраняет bytes байтов данных data по ключу key
     virtual Status Set( std::string key, char* data, size_t bytes ) = 0;
-    /// Возвращает указатель на загруженный объект данных
+    /// Возвращает указатель на загруженный объект данных по ключу key
     virtual Status Get( std::string key, char*& data, size_t& bytes ) = 0;
 };
 

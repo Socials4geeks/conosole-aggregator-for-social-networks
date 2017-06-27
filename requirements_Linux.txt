@@ -3,6 +3,6 @@ g++
 git
 make
 zlib1g-dev
-libboost1.55-all-dev
+libboost-dev
 libssl-dev
 cmake
