@@ -25,6 +25,7 @@ private:
 
     Status RemoveSession( Session session );
     bool IsSessionActive( Session session );
+    bool wasLoadedUsers;
 };
 
 #endif /* core_h */
