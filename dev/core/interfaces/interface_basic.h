@@ -21,9 +21,7 @@ public:
     virtual Status PrintFriends( Response data );
     virtual Status PrintWall( Response data );
     virtual Status PrintError( Response data );
-
-    Request Input();
-
+ 
 private:
     Status PrintURL( Response data );  ///< Отобразить ссылку для авторизации.
 };

@@ -41,5 +41,4 @@ Status InterfaceBasic::PrintError( Response data ) {
     return OK;
 };
 
-// TODO
-Request InterfaceBasic::Input() {}
+
