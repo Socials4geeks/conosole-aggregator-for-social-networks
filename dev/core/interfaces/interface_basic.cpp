@@ -36,8 +36,15 @@ Status InterfaceBasic::PrintURL( Response data ) {
 
 
 Status InterfaceBasic::PrintError( Response data ) {
-    std::cout << termcolor::on_red << "Error:"
-              << termcolor::reset << " " << data.Params[0]["reason"] << std::endl;
+    if (data.Type == ERROR) {
+        std::cout << termcolor::on_red << "Error:"
+                  << termcolor::reset << " " << data.Params[0]["reason"] << std::endl;
+    }
+    if (data.Type == ACCEPT) {
+        std::cout << termcolor::green << "Access."
+          << termcolor::reset << std::endl;
+
+    }
     return OK;
 };
 
