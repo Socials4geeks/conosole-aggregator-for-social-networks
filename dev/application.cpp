@@ -51,6 +51,9 @@ void Application::output( Response response ) {
                curUi->PrintError( response );
                break;
        } 
+    } else if( response.Params[ 0 ][ "SOCIAL_NETWORK_NAME" ] == "local" ) {
+        curUi = ui[0];
+        curUi->PrintError( response ); //TODO: PrintAccept
     } else {
         curUi = ui[0];
         curUi->PrintError( response );

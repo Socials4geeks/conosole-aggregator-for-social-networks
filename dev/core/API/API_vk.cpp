@@ -105,10 +105,10 @@ Status API_vk::SendMessage( authInfo loginPassword, std::string topic, std::stri
     client.request( request ).then([]( http_response response ) {
         if(response.status_code() == OK) {
             return OK;
-        } else {
-            return UNKNOWN_ERROR;
         }
+        return UNKNOWN_ERROR;
     });
+    return UNKNOWN_ERROR;
 }
 
 std::vector<Message> API_vk::GetLastMessages( int uid ) {

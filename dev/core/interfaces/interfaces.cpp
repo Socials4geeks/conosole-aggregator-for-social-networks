@@ -20,7 +20,7 @@ Request Interface::Input() {
     std::string account, command;
     Request request;
     while (true) {
-        cin.clear();
+        std::cin.clear();
         std::getline(std::cin, line);
 
         std::istringstream in(line);
