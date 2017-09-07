@@ -1,0 +1,8 @@
+g++-4.8
+g++
+git
+make
+zlib1g-dev
+libboost-all-dev
+libssl-dev
+cmake

@@ -1,0 +1,3 @@
+#!/bin/bash
+OBJS=$(find dev -name *.cpp | perl -pe 's/cpp/o/g')
+echo $OBJS

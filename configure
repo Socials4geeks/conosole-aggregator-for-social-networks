@@ -1,0 +1,49 @@
+#!/bin/bash
+
+#NOTE: Чтобы собрать дебаг-версию, нужно просто заменить все reliase на debug
+
+OS=$(uname -sr | awk '{ print $1 }')
+if [ $OS == 'Linux' ]
+then
+    if ! apt-get install software-properties-common &&
+       add-apt-repository ppa:george-edison55/cmake-3.x &&
+       apt-get update &&
+       xargs apt-get -y install < requirements_Linux.txt &&
+       apt-get upgrade
+    then
+       echo ERROR occured when configuration the project!
+       exit 1
+    fi
+elif [ $OS == 'Darwin' ]
+then
+    if ! xargs brew install < requirements_Darwin.txt
+    then
+       echo ERROR occured when configuration the project!
+       exit 1
+    fi
+else
+    echo "ERROR: Your operation system is not supported yet :("
+    exit 1
+fi
+
+if git clone https://github.com/Microsoft/cpprestsdk.git casablanca &&
+   cd casablanca/Release &&
+   mkdir temp.casablanca.build.release &&
+   cd temp.casablanca.build.release &&
+   CXX=g++ CMAKE_CXX_COMPILER=g++ cmake .. -DCMAKE_BUILD_TYPE=Release &&
+   make -j 4 &&
+   cd Binaries
+   ./test_runner *_test.so &&
+   cd .. &&
+   make install &&
+   cd ../../.. &&
+   mkdir include &&
+   for h in $(find dev -regex '.*\.\(h\|hpp\)')
+       do cp -f $h include/
+   done
+then
+   echo DONE project is success configurated!
+else
+   echo ERROR occured when configuration the project!
+   exit 1
+fi
