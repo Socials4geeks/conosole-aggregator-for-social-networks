@@ -3,7 +3,6 @@
 #include <string>
 #include <vector>
 
-/*
 #include <boost/format.hpp>
 #include <cpprest/http_client.h>
 #include <cpprest/filestream.h>
@@ -161,4 +160,4 @@ uri_builder API_vk::buildApiUrl( std::string method, UrlParams uri_params, bool 
     result.append_query( "v", VERSION );
 
     return result;
-}*/
+}
