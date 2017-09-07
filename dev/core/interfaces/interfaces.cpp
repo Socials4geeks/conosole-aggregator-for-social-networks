@@ -20,7 +20,7 @@ Request Interface::Input() {
     std::string account, command;
     Request request;
     while (true) {
-        cin.clear();
+        std::cin.clear();
         std::getline(std::cin, line);
 
         std::istringstream in(line);
@@ -98,6 +98,10 @@ TypeOfAction Interface::string_to_action(std::string str) {
         return NEW_LOCAL_ACCOUNT;
     else if (str == "login_local_account")
         return LOGIN_LOCAL_ACCOUNT;
+    else if (str == "add_remote_account")
+        return ADD_REMOTE_ACCOUNT;
+    else if (str == "delete_remote_account")
+        return DELETE_REMOTE_ACCOUNT;
     else if (str == "show_messages")
         return SHOW_MESSAGES;
     else if (str == "show_friends")

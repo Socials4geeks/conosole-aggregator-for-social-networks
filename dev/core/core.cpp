@@ -36,6 +36,9 @@ Response Core::ExecuteRequest( Request request  ) {
     Response response;
     response.Type = ERROR;
     params tmp;
+    //TODO: Исправить временный вариант на привязку IdOfRemoteAccount к SOCIAL_NETWORK_NAME
+    request.Params.insert( std::make_pair( "SOCIAL_NETWORK_NAME", request.IdOfRemoteAccount ) );
+    
     tmp.insert( std::make_pair( "SOCIAL_NETWORK_NAME", request.Params[ "SOCIAL_NETWORK_NAME" ] ) );
     response.Params.push_back( tmp );
     switch ( request.Action ) {
@@ -47,8 +50,6 @@ Response Core::ExecuteRequest( Request request  ) {
             if( authorizator->Signup( request.Params[ "LOCAL_USERNAME" ], request.Params[ "LOCAL_PASSWORD" ] ) != OK ) {
                 return response;
             }
-            response.Type = ACCEPT;
-            break;
         }
         case LOGIN_LOCAL_ACCOUNT: {
             try {
@@ -62,6 +63,17 @@ Response Core::ExecuteRequest( Request request  ) {
             response.Type = ACCEPT; //TODO: Предусмотреть другие варианты
             break;
         }
+        case ADD_REMOTE_ACCOUNT: {
+            if( activeSession.IsEmpty() ) {
+                return response;
+            }
+            activeSession.AddAuthForApi( request.Params[ "NAME_OF_SOCIAL_ACCOUNT" ], std::make_pair(request.Params[ "REMOTE_LOGIN" ], request.Params[ "REMOTE_PASSWORD" ] ) );
+            break;
+        }
+        case DELETE_REMOTE_ACCOUNT: {
+            activeSession.DeleteAuthForApi( request.Params[ "NAME_OF_SOCIAL_ACCOUNT" ] );
+            break;
+        }
         case SHOW_MESSAGES:
         case SHOW_WALL:
         case SHOW_FRIENDS:
@@ -69,19 +81,26 @@ Response Core::ExecuteRequest( Request request  ) {
         case ADD_WALL:
         case ADD_FRIEND:
         case REMOVE_FRIEND: {
-            authInfo tmp = activeSession.GetAuthForApi( request.Params[ "SOCIAL_NETWORK_NAME" ] ); //Handle exception NoAuthData
-            request.Params[ "REMOTE_LOGIN" ] = tmp.first;
-            request.Params[ "REMOTE_PASSWORD" ] = tmp.second;
-            response = implementer.ExecuteRequest( request );
+            try {
+                authInfo tmp = activeSession.GetAuthForApi( request.IdOfRemoteAccount );
+                request.Params[ "REMOTE_LOGIN" ] = tmp.first;
+                request.Params[ "REMOTE_PASSWORD" ] = tmp.second;
+                response = implementer.ExecuteRequest( request );
+            } catch (NoAuthData) {
+                return response;
+            }
+            break;
+        }
+        case UNKNOWN: {
             break;
         }
     }
     return response;
 }
 
+//TODO: А надо ли?
 Status Core::RemoveSession( Session session ) {
     if ( !IsSessionActive( session ) ) {
-        throw NotAuthorized();
         return UNKNOWN_ERROR;
     }
     for ( auto i : sessions ) {
@@ -92,6 +111,7 @@ Status Core::RemoveSession( Session session ) {
     return OK;
 }
 
+//TODO: А надо ли?(2)
 bool Core::IsSessionActive( Session session ) {
     for ( auto i : sessions ) {
         if( i == session ){

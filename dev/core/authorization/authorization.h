@@ -12,7 +12,7 @@ public:
     virtual ~Authorizator();
 
     virtual Status Signup( std::string username, std::string password ) = 0;
-    virtual Session Login( std::string username, std::string password ) = 0;
+    virtual Session Login( std::string username, std::string password ) = 0; //TODO: Должна возвращать сессию с вектором удалённых аккаунтов загруженных с диска
     
     std::vector< authInfo > GetUsers();
 

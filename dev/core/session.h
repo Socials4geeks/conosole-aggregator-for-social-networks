@@ -19,9 +19,13 @@ public:
     Session();
     Session( std::string login );
     Session( std::string login, params settings );
-    authInfo GetAuthForApi( std::string nameOfRemoteAccount ); //Take id of SN. For example, "vk1"
-    bool operator==( Session );
     ~Session();
+    
+    bool operator==( Session );
+    authInfo GetAuthForApi( std::string nameOfRemoteAccount ); //Take id of SN. For example, "vk1"
+    Status AddAuthForApi( std::string nameOfRemoteAccount, authInfo loginPassword );
+    Status DeleteAuthForApi( std::string nameOfRemoteAccount );
+    bool IsEmpty();
 
 private:
     std::string localLogin;
